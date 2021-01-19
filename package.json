@@ -1,8 +1,8 @@
 {
-  "name": "MUSI-6202 Slides",
-  "version": "0.5",
-  "description": "Slides for MUSI-6202",
-  "private": true,
+  "name": "reveal.js-webpack-kit",
+  "version": "2.0.2",
+  "description": "webpack-powered reveal.js presentations",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "make-custom-tex-extension": "cd src/_scripts/reveal-plugins/tex-components && ../../../../node_modules/mathjax-full/components/bin/pack && mkdir -p ../../../../dist/lib/mathjax/tex-components && cp tex_fragments.min.js ../../../../dist/lib/mathjax/tex-components/tex_fragments.min.js",
@@ -16,28 +16,36 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abeck99/musi-6202.git"
+    "url": "git+https://github.com/gcalmettes/reveal.js-webpack-kit.git"
   },
   "keywords": [
     "webpack",
     "reveal.js"
   ],
-  "author": "Andrew Beck (slide setup from Guillaume Calmettes)",
+  "author": "Guillaume Calmettes",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/abeck99/musi-6202/issues"
+    "url": "https://github.com/gcalmettes/reveal.js-webpack-kit/issues"
   },
-  "homepage": "https://github.com/abeck99/musi-6202#readme",
+  "homepage": "https://github.com/gcalmettes/reveal.js-webpack-kit#readme",
   "devDependencies": {
     "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.0.6",
+    "babel-plugin-jsx-control-statements": "^4.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "file-loader": "^4.3.0",
     "google-fonts-plugin": "^5.0.2",
+    "highlight-loader": "^0.7.4",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-tags-plugin": "^2.0.17",
+    "jsx-control-statements": "^3.2.8",
     "mini-css-extract-plugin": "^0.8.2",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -57,7 +65,12 @@
     "@fortawesome/free-regular-svg-icons": "^5.12.0",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "highlight.js": "^9.17.1",
+    "html-loader": "^1.3.2",
+    "javascript-natural-sort": "^0.7.1",
+    "markdown-loader": "^6.0.0",
     "mathjax-full": "^3.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "reveal.js": "^3.7.0",
     "reveal.js-menu": "^1.2.0",
     "reveal_external": "^1.3.0",

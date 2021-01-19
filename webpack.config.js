@@ -12,7 +12,10 @@ const GoogleFontsPlugin = require('google-fonts-plugin')
 const MathJax = require('mathjax-full/components/webpack.common.js');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const gchelpers =  require('./src/_scripts/_modules/helpers.js')
+const pathBase = path.resolve(__dirname);
+const pathSrc = path.join(pathBase, 'src');
+const pathLib = path.join(pathBase, 'lib');
+const pathDist = path.join(pathBase, 'dist');
 
 async function getConfig() {
 
@@ -40,15 +43,12 @@ async function getConfig() {
   const FONTS_DONWLOAD = userConfig.GOOGLE_FONTS_FORMATS.map(format => fs.existsSync(`./dist/lib/css/${format}.css`))
     .reduce((acc, bool) => acc && bool, true) ? false : true
 
-  const htmlList = await gchelpers.getEntries('./src/')
-  const [entries, htmlPluginList] = gchelpers.getEntriesAndHTMLPlugins(htmlList, userConfig.FONTAWESOME_BACKEND=='svg')
-  
   console.log('Google fonts download:', FONTS_DONWLOAD)
   console.log('FontAwesome framework:', userConfig.FONTAWESOME_BACKEND)
 
 
   return {
-    entry: entries,
+    entry: path.join(pathSrc, 'presentation'),
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'lib/js/[name].js'
@@ -79,6 +79,10 @@ async function getConfig() {
           use: {
             loader: 'babel-loader'
           }
+        },
+        {
+          test: /\.md$/,
+          loader: 'html-loader!highlight-loader!markdown-loader'
         },
         {
           test: /\.(sa|sc|c)ss$/,
@@ -115,7 +119,9 @@ async function getConfig() {
     resolve: {
       alias: {
         nodePath: path.join(__dirname, 'node_modules'),
-        stylesPath: path.join(__dirname, 'src/_styles'),
+        stylesPath: path.join(pathLib, 'css'),
+        lib: pathLib,
+        'reveal-plugins': path.join(pathLib, 'reveal-plugins'),
       }
     },
 
@@ -125,8 +131,12 @@ async function getConfig() {
     },
 
     plugins: [ 
-      ...htmlPluginList,
-
+     
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        title: '',
+        template: path.join(pathLib, 'template', 'Html.js') // Load a custom template
+      }),
 
       new webpack.ProvidePlugin({
         Reveal: 'reveal.js',
@@ -141,7 +151,7 @@ async function getConfig() {
         // Mathjax fonts
         { from: 'node_modules/mathjax-full/es5/output', to: 'lib/mathjax' },
         // Mathjax tex component
-        { from: 'src/_scripts/reveal-plugins/tex-components/*.min.js', to: 'lib/mathjax/tex-components/[name].js' },
+        { from: path.join(pathLib, 'reveal-plugins', 'tex-components', '*.min.js'), to: 'lib/mathjax/tex-components/[name].js' },
         // any files in content
         { context: 'src/content',
           from: '**/*',
@@ -193,20 +203,6 @@ async function getConfig() {
           append: true 
     	}),
 
-      // clean up generatedEntries folder of file-specific tree shaking for FA icons
-      // only when not in dev-server
-      {
-        apply: (compiler) => {
-          compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-            if (process.env.NODE_ENV != 'dev-server') {
-              exec('rm -R ./src/_scripts/_generatedEntries', (err, stdout, stderr) => {
-                if (stdout) process.stdout.write(stdout);
-                if (stderr) process.stderr.write(stderr);
-              });
-            }
-          });
-        }
-      },
     ].filter((plugin) => plugin !== false) // filter out skipped conditions
   };
 
