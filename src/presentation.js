@@ -8,18 +8,19 @@ import buildFileTree, { mapTree } from 'lib/helper/fileTree';
 import './style/presentation.scss';
 import options from './options';
 
+import marked from 'marked';
+
 function getSlides() {
   // regex info: matches js & md files two folders deep
-  const context = require.context("./slides", true, /^\/?([^\/]+\/?){0,3}(js|md)$/);
-  const files = context.keys().sort(naturalSort);
-
-  const fileTree = buildFileTree(files, 1);
-  const slides = mapTree(fileTree, (file) => {
-    const slide = context(file);
-    return slide.default ? slide.default : slide
+  const context = require("./class-00");
+  const slides = context.default().map(slide => {
+    if (typeof(slide) == 'string') {
+      return {__html: marked(slide)};
+    }
+    return slide;
   });
 
-  return [context, slides, files];
+  return [context, slides];
 }
 
 function renderSlideDeck(slides) {
@@ -27,18 +28,13 @@ function renderSlideDeck(slides) {
 }
 
 
-let [context, slides, files] = getSlides();
+let [context, slides] = getSlides();
 
 renderSlideDeck(slides);
 
 if (module.hot) {
   module.hot.accept(context.id, function () {
-    const len = files.length;
-    [context, slides, files] = getSlides();
-
-    if (len !== files.length) {
-      throw new Error("Cannot update because slide count changed");
-    }
+    [context, slides] = getSlides();
 
     // render slide deck
     renderSlideDeck(slides);
