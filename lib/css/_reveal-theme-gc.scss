@@ -66,8 +66,7 @@ body {
 .reveal div p {
   margin: $blockMargin 0;
 	line-height: 1.1;
-	text-align: left;
-  font-size: $small; }
+	text-align: left;}
 
 /* Ensure certain elements are never larger than the slide itself */
 .reveal img,
@@ -91,10 +90,14 @@ body {
   text-align: left;
   margin: 0 0 0 1em; }
 
-.reveal ul,
-.reveal div ul,
-.reveal p ul {
-  font-size: $small; }
+li {
+  margin-bottom: 10px;
+}
+
+// .reveal ul,
+// .reveal div ul,
+// .reveal p ul {
+//   font-size: $small; }
 
 
 $list-style-type: (
@@ -249,6 +252,28 @@ body .reveal .slides section .fragment {
 /*********************************************
  * HEADERS
  *********************************************/
+
+.title-heading {
+  color: $titleHeadingColor;
+}
+
+.heading {
+  color: $headingColor;
+}
+
+.bottom-right-logo {
+  height: 15%;
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
+}
+
+.top-right-logo {
+  height: 15%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
 
 @for $i from 1 through 6 {
 	.reveal h#{$i} {

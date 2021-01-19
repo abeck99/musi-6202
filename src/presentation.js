@@ -5,14 +5,20 @@ import naturalSort from 'javascript-natural-sort';
 import Deck from 'lib/component/Deck';
 import buildFileTree, { mapTree } from 'lib/helper/fileTree';
 
-import './style/presentation.scss';
+import 'lib/css/main.scss';
 import options from './options';
 
 import marked from 'marked';
 
+const allPresentationContexts = {
+  'class-00': require('./class-00'),
+  'class-01': require('./class-01'),
+}
+
 function getSlides() {
   // regex info: matches js & md files two folders deep
-  const context = require("./class-00");
+  const jsName = document.getElementById('reveal').attributes.jsName.value;
+  const context = allPresentationContexts[jsName];
   const slides = context.default().map(slide => {
     if (typeof(slide) == 'string') {
       return {__html: marked(slide)};

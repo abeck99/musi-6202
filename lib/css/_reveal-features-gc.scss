@@ -37,6 +37,18 @@ $colorsList: (
   display: flex;
 }
 
+.background {
+  position: relative;
+  width: 100%;
+  opacity: 50%;
+}
+
+
+.oddRow {
+	background: $warning;
+  color: $backgroundColor;
+}
+
 .flex-center {
     display: flex;
     align-items: center; /* Vertical center alignment */
@@ -48,6 +60,10 @@ section bspan,
 section .bspan,
 section .inline-block {
   display: inline-block !important;
+}
+
+canvas {
+//  width: 100%;
 }
 
 hr {
@@ -96,6 +112,10 @@ body section {
   & .circled {
     border-radius: 50%; 
   }
+}
+
+.bordered {
+  padding: 10px;
 }
 
 .border-top { border-top-style: solid !important; border-top-width: 1px !important; }

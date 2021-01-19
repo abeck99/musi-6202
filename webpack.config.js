@@ -17,6 +17,17 @@ const pathSrc = path.join(pathBase, 'src');
 const pathLib = path.join(pathBase, 'lib');
 const pathDist = path.join(pathBase, 'dist');
 
+const getEntries = function(filepath) {
+  return fs.readdirSync(filepath)
+    .filter(file => file.match(/class.*\.js$/))
+    .map(file => {
+      return {
+        name: path.parse(file).name,
+        path: file
+      }
+    })
+}
+
 async function getConfig() {
 
   // Configurable options for the build
@@ -46,6 +57,18 @@ async function getConfig() {
   console.log('Google fonts download:', FONTS_DONWLOAD)
   console.log('FontAwesome framework:', userConfig.FONTAWESOME_BACKEND)
 
+  const presentations = getEntries(pathSrc)
+
+  const presentationsHtml = presentations.map(entry => {
+          const name = entry.name;
+    const filepath = entry.path;
+    console.log("HTML FOR ", `./${path.parse(filepath).name}.html`)
+          return new HtmlWebpackPlugin({
+            title: name,
+            template: path.join(pathLib, 'template', 'Html.js'),
+            filename: `./${path.parse(filepath).name}.html`,
+          })
+  })
 
   return {
     entry: path.join(pathSrc, 'presentation'),
@@ -74,11 +97,19 @@ async function getConfig() {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader'
-          }
+            loader: 'babel-loader',
+          },
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
         },
         {
           test: /\.md$/,
@@ -117,6 +148,7 @@ async function getConfig() {
     },
 
     resolve: {
+      extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
       alias: {
         nodePath: path.join(__dirname, 'node_modules'),
         stylesPath: path.join(pathLib, 'css'),
@@ -130,7 +162,8 @@ async function getConfig() {
       port: 9000
     },
 
-    plugins: [ 
+    plugins: [
+      ...presentationsHtml,
      
       new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -204,6 +237,21 @@ async function getConfig() {
           tags: userConfig.GOOGLE_FONTS_FORMATS.map(format => `lib/css/${format}.css`),
           append: true 
     	}),
+
+      // clean up generatedEntries folder of file-specific tree shaking for FA icons
+      // only when not in dev-server
+      {
+        apply: (compiler) => {
+          compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+            if (process.env.NODE_ENV != 'dev-server') {
+              exec('rm -R ./src/_generatedEntries', (err, stdout, stderr) => {
+                if (stdout) process.stdout.write(stdout);
+                if (stderr) process.stderr.write(stderr);
+              });
+            }
+          });
+        }
+      },
 
     ].filter((plugin) => plugin !== false) // filter out skipped conditions
   };
