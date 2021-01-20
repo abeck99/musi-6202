@@ -85,8 +85,8 @@ export default function Class00() {
                         oddRowClass="oddRow"
                         items={[
                           ["Date", "Topics", "Exercise", "Assignment", "Notes"],
-                          ["01/18", "Introduction, signals, periodicity, random processes, pdf, expectation values/moments, correlation", "Correlation", "Git Setup", "MLK Holiday"],
-                          ["01/25", "Convolution, power spectral density", "FIR Filter", "Filter & Convolution", ""],
+                          ["01/18", "Introduction, signals, periodicity, random processes", "", "Git Setup", "MLK Holiday"],
+                          ["01/25", "pdf, expectation values/moments, correlation, Convolution, power spectral density", "Correlation & FIR Filter", "Filter & Convolution", ""],
                           ["02/01", "Fourier series & Fourier transform", "DFT", "Fourier Analysis", ""],
                           ["02/08", "Sampling, quantization, SNR, number formats", "Quantization", "", ""],
                           ["02/15", "Oversampling, dither, noise-shaping, non-linear quantization", "", "Dither, ns", ""],

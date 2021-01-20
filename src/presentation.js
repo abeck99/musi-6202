@@ -13,6 +13,7 @@ import marked from 'marked';
 const allPresentationContexts = {
   'class-00': require('./class-00'),
   'class-01': require('./class-01'),
+  'class-02': require('./class-02'),
 }
 
 function getSlides() {
