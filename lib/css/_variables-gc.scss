@@ -27,9 +27,88 @@ $pink: #FB7FC0;
 
 
 // FONTS
+@font-face {
+  font-family: 'Concourse';
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/Concourse T3 Bold.ttf");
+}
+@font-face {
+  font-family: 'Concourse';
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/Concourse T3 Italic.ttf");
+}
+@font-face {
+  font-family: 'Concourse';
+  font-style: italic;
+  font-weight: bold;
+  src: url("../fonts/Concourse T3 Bold Italic.ttf");
+}
 
-$mainFont: 	  'Raleway', sans-serif; //'Source Sans Pro', Helvetica, sans-serif;
-$headingFont: 'Raleway', sans-serif; //'Source Sans Pro', Helvetica, sans-serif;
+@font-face {
+  font-family: 'Concourse';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/Concourse T3 Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Hermes Maia';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/Hermes Maia T3 Regular.ttf");
+}
+@font-face {
+  font-family: 'Hermes Maia';
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/Hermes Maia T3 Bold.ttf");
+}
+@font-face {
+  font-family: 'Hermes Maia';
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/Hermes Maia T3 Italic.ttf");
+}
+@font-face {
+  font-family: 'Hermes Maia';
+  font-style: italic;
+  font-weight: bold;
+  src: url("../fonts/Hermes Maia T3 Bold Italic.ttf");
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/FiraCode-Regular.otf");
+}
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/FiraCode-Bold.otf");
+}
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: medium;
+  src: url("../fonts/FiraCode-Medium.otf");
+}
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: light;
+  src: url("../fonts/FiraCode-Light.otf");
+}
+
+
+
+
+$mainFont: 	  'Concourse', sans-serif; //'Source Sans Pro', Helvetica, sans-serif;
+$headingFont: 'Hermes Maia', sans-serif; //'Source Sans Pro', Helvetica, sans-serif;
+$codeFont: 'Fira Code', sans-serif; //'Source Sans Pro', Helvetica, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;

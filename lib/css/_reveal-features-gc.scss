@@ -202,14 +202,14 @@ $borderStyles: dotted, dashed, solid, none;
 *********************************************/
 
 // Fonts
-$fontsList: (
-  passionone: 'Passion One');
+// $fontsList: (
+//   passionone: 'Passion One');
 
-@each $font, $family in $fontsList {
-  section .font-#{$font}{
-    font-family: $family !important;
-  }
-}
+// @each $font, $family in $fontsList {
+//   section .font-#{$font}{
+//     font-family: $family !important;
+//   }
+// }
 
 /////////////////////
 // Size

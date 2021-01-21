@@ -138,7 +138,7 @@ async function getConfig() {
             'sass-loader',
           ],
         },
-        { test: /(eot|woff|woff2|ttf|svg)(\?\S*)?$/,
+        { test: /(eot|woff|woff2|ttf|otf|svg)(\?\S*)?$/,
         use: [
           {
             loader: 'file-loader',

@@ -34,8 +34,8 @@ export default function Class00(isPdf) {
             <a href="mailto:andrew@elasticaud.io">mailto:andrew@elasticaud.io</a>
             <div>WWW</div>
             <div>
-              <p>https://abeck.io/</p>
-              <p>https://www.elasticaudio.com/</p>
+              <p><a href="https://abeck.io">https://abeck.io/</a></p>
+              <p><a href="https://www.elasticaudio.com/">https://www.elasticaudio.com/</a></p>
             </div>
             <div>Office Hours</div>
                 <div>

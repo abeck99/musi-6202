@@ -317,7 +317,7 @@ PI = 3.14159265358
 ), () => (
     <Section>
     <h3>Random Process</h3>
-    Ensemble of random series
+    <p>Ensemble of random series</p>
     <img style={{width: "50%"}} src={image10}/>
     <div className="normal">
     <div className="heading">Special Cases:</div>

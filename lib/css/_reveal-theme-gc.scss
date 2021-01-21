@@ -166,7 +166,7 @@ $list-style-type: (
 }
 
 .reveal code {
-	font-family: monospace;
+	font-family: $codeFont;
 	text-transform: none;
 }
 
@@ -254,6 +254,10 @@ body .reveal .slides section .fragment {
  *********************************************/
 
 .title-heading {
+		font-family: $headingFont;
+		font-weight: 'bold';
+		line-height: $headingLineHeight;
+		letter-spacing: $headingLetterSpacing;
   color: $titleHeadingColor;
 }
 
