@@ -11,7 +11,7 @@ import { MathComponent } from 'mathjax-react'
 import Fragment from 'lib/component/Fragment';
 
 
-export default function Class00() {
+export default function Class00(isPdf) {
   return [
     () => (
       <Section className="title-slide">

@@ -6,6 +6,7 @@ import {
   AnnotationBracket, AnnotationXYThreshold
 } from 'react-annotation'
 import Fragment from 'lib/component/Fragment';
+import WebOnly from 'lib/component/WebOnly';
 import { faCoffee,  } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -95,6 +96,9 @@ export default class Example extends PureComponent {
   constructor(props) {
     super(props);
     this.state = initialState;
+    if (props.numHarmonics != undefined) {
+      this.state.numHarmonics = props.numHarmonics;
+    }
   }
 
   setOneHundred = () => {
@@ -153,11 +157,15 @@ export default class Example extends PureComponent {
       barIndex, left, right, refAreaLeft, refAreaRight, top, bottom, top2, bottom2, numHarmonics
     } = this.state;
 
+    const {
+      isPdf
+    } = this.props
+
     const data = buildData(0, 1, 0.5, 1, numHarmonics, 128)
     const harmData = buildHarmonicsData(numHarmonics)
 
     const width = 800
-    const height = 400
+    const height = 350
 
     return (
         <div className="highlight-bar-charts small" style={{ userSelect: 'none' }}>
@@ -179,17 +187,19 @@ export default class Example extends PureComponent {
         </div>
         </div>
         </div>
+        <WebOnly isPdf={isPdf}>
         <a  onClick={this.setOne}>1</a>, 
         <a  onClick={this.setTen}>10</a>, 
         <a  onClick={this.setTwenty}>20</a>, 
         <a  onClick={this.setFifty}>50</a>, 
         <a  onClick={this.setOneHundred}>100</a>
+        </WebOnly>
         </div>
         <div className="col-70 smaller">
         <div className="right">Harmonic Amplitudes</div>
                 <BarChart
           width={550}
-      height={200}
+      height={150}
           data={harmData}
         >
           <CartesianGrid strokeDasharray="3 3" />

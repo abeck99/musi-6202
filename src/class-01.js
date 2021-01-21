@@ -18,7 +18,7 @@ import tascamImage from './content/imgs/class-01/TascamDA88.png';
 import cdImage from './content/imgs/class-01/cd.jpg';
 import freqDomainImage from './content/imgs/class-01/FreqDomain.png';
 
-export default function Class01() {
+export default function Class01(isPdf) {
   return [
     () => (
       <Section className="title-slide">

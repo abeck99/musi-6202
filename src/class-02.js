@@ -28,7 +28,7 @@ import image10 from './content/imgs/class-02/image10.jpg';
 
 
 
-export default function Class02() {
+export default function Class02(isPdf) {
   return [
     () => (
       <Section className="title-slide">
@@ -160,17 +160,73 @@ export default function Class02() {
     <Section>
     <h2>Sawtooth Wave</h2>
     <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
-    <SawToothBuild/>
+    <SawToothBuild isPdf={isPdf}/>
     </div>
     </Section>
-), () => (
+), {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Sawtooth Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SawToothBuild numHarmonics={2} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Sawtooth Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SawToothBuild numHarmonics={10} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Sawtooth Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SawToothBuild numHarmonics={20} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Sawtooth Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SawToothBuild numHarmonics={50} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, () => (
     <Section>
     <h2>Square Wave</h2>
     <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
-    <SquareBuild/>
+    <SquareBuild isPdf={isPdf}/>
     </div>
     </Section>
-), () => (
+), {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Square Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SquareBuild numHarmonics={3} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Square Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SquareBuild numHarmonics={11} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Square Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SquareBuild numHarmonics={21} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, {target: 'pdf', slide: () => (
+    <Section>
+    <h2>Square Wave</h2>
+    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <SquareBuild numHarmonics={51} isPdf={isPdf}/>
+    </div>
+    </Section>
+)}, () => (
     <Section>
     <div className="small">Square wave additive synthesis, try at <a href="https://intonal.io/">https://intonal.io/</a></div>
           <pre className="javascript smallest"><code data-trim>

@@ -13,20 +13,33 @@ import marked from 'marked';
 const allPresentationContexts = {
   'index': require('./index'),
   'class-00': require('./class-00'),
+  'class-00-pdf': require('./class-00'),
   'class-01': require('./class-01'),
+  'class-01-pdf': require('./class-01'),
   'class-02': require('./class-02'),
+  'class-02-pdf': require('./class-02'),
 }
 
 function getSlides() {
   // regex info: matches js & md files two folders deep
   const jsName = document.getElementById('reveal').attributes.jsName.value;
   const context = allPresentationContexts[jsName];
-  const slides = context.default().map(slide => {
-    if (typeof(slide) == 'string') {
-      return {__html: marked(slide)};
+  const isPdf = jsName.endsWith("-pdf")
+
+  const slides = context.default(isPdf).reduce((filtered, inSlide) => {
+    var slide = inSlide
+    if (typeof(inSlide) == 'string') {
+      slide = {__html: marked(inSlide)}
+    } else if (typeof(inSlide == 'object') && inSlide.target != undefined) {
+      if (inSlide.target == 'pdf' && !isPdf) {
+        return filtered
+      }
+      slide = inSlide.slide
     }
-    return slide;
-  });
+
+    filtered.push(slide)
+    return filtered
+  }, [])
 
   return [context, slides];
 }
@@ -34,7 +47,6 @@ function getSlides() {
 function renderSlideDeck(slides) {
   ReactDOM.render(<Deck slides={slides} options={options}/>, document.getElementById('reveal'));
 }
-
 
 let [context, slides] = getSlides();
 

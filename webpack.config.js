@@ -59,16 +59,24 @@ async function getConfig() {
 
   const presentations = getEntries(pathSrc)
 
-  const presentationsHtml = presentations.map(entry => {
-          const name = entry.name;
+  const presentationsHtml = presentations.reduce((entries, entry) => {
+    const name = entry.name;
     const filepath = entry.path;
-    console.log("HTML FOR ", `./${path.parse(filepath).name}.html`)
-          return new HtmlWebpackPlugin({
-            title: name,
-            template: path.join(pathLib, 'template', 'Html.js'),
-            filename: `./${path.parse(filepath).name}.html`,
-          })
-  })
+    const baseName = path.parse(filepath).name
+    console.log("HTML FOR ", `./${baseName}.html`)
+
+    entries.push(new HtmlWebpackPlugin({
+      title: name,
+      template: path.join(pathLib, 'template', 'Html.js'),
+      filename: `./${baseName}.html`,
+    }))
+    entries.push(new HtmlWebpackPlugin({
+      title: `${baseName}-pdf`,
+      template: path.join(pathLib, 'template', 'Html.js'),
+      filename: `./${baseName}-pdf.html`,
+    }))
+    return entries
+  }, [])
 
   return {
     entry: path.join(pathSrc, 'presentation'),
@@ -237,21 +245,6 @@ async function getConfig() {
           tags: userConfig.GOOGLE_FONTS_FORMATS.map(format => `lib/css/${format}.css`),
           append: true 
     	}),
-
-      // clean up generatedEntries folder of file-specific tree shaking for FA icons
-      // only when not in dev-server
-      {
-        apply: (compiler) => {
-          compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-            if (process.env.NODE_ENV != 'dev-server') {
-              exec('rm -R ./src/_generatedEntries', (err, stdout, stderr) => {
-                if (stdout) process.stdout.write(stdout);
-                if (stderr) process.stderr.write(stderr);
-              });
-            }
-          });
-        }
-      },
 
     ].filter((plugin) => plugin !== false) // filter out skipped conditions
   };
