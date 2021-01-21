@@ -97,12 +97,31 @@ export default class Example extends PureComponent {
     this.state = initialState;
   }
 
-  setHundred = () => {
+  setOneHundred = () => {
       this.setState({
         ...this.state,
         numHarmonics: 100
       })
- }
+  }
+  setTen = () => {
+    this.setState({
+      ...this.state,
+      numHarmonics: 10,
+    })
+  }
+  setTwenty = () => {
+    this.setState({
+      ...this.state,
+      numHarmonics: 20,
+    })
+  }
+
+  setFifty = () => {
+    this.setState({
+      ...this.state,
+      numHarmonics: 50,
+    })
+  }
 
   setOne = () => {
     if (this.state.numHarmonics > 1) {
@@ -160,6 +179,11 @@ export default class Example extends PureComponent {
         </div>
         </div>
         </div>
+        <a  onClick={this.setOne}>1</a>, 
+        <a  onClick={this.setTen}>10</a>, 
+        <a  onClick={this.setTwenty}>20</a>, 
+        <a  onClick={this.setFifty}>50</a>, 
+        <a  onClick={this.setOneHundred}>100</a>
         </div>
         <div className="col-70 smaller">
         <div className="right">Harmonic Amplitudes</div>

@@ -153,7 +153,7 @@ export default function Class02() {
 ), () => (
     <Section>
     <h2>Reconstruction</h2>
-    <p>Periodic Signals can be reconstructored through a sum of sinusoidals at frequencies $k\cdot\omega$</p>
+    <p>Periodic Signals can be reconstructed through a sum of sinusoidals at frequencies $k\cdot\omega$</p>
     <div className="small"><MathComponent tex={String.raw`\hat{x}(t) = a_1 \cdot sin(\omega_0t) + a_2\cdot sin(2\cdot\omega_0t)+ ... +a_3\cdot sin(n\cdot\omega_0t)`}/></div>
     </Section>
 ), () => (
@@ -176,7 +176,7 @@ export default function Class02() {
           <pre className="javascript smallest"><code data-trim>
     {`main = {sr: float32 in
   numHarmonics = 25
-  blSquare = makeBlAdditiveSquareWave(25)
+  blSquare = makeBlAdditiveSquareWave(numHarmonics)
   out = blSquare(440, sr) * 0.25
 }
 
