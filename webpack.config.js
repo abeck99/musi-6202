@@ -10,6 +10,7 @@ const fs = require('fs')
 const exec = require('child_process').exec;
 const GoogleFontsPlugin = require('google-fonts-plugin')
 const MathJax = require('mathjax-full/components/webpack.common.js');
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const pathBase = path.resolve(__dirname);
@@ -19,7 +20,7 @@ const pathDist = path.join(pathBase, 'dist');
 
 const getEntries = function(filepath) {
   return fs.readdirSync(filepath)
-    .filter(file => file.match(/(class.*\.js|index\.js)$/))
+    .filter(file => file.match(/^(class.*\.js|index\.js)$/))
     .map(file => {
       return {
         name: path.parse(file).name,
@@ -59,19 +60,24 @@ async function getConfig() {
 
   const presentations = getEntries(pathSrc)
 
+  var entryPoints = {}
+
   const presentationsHtml = presentations.reduce((entries, entry) => {
     const name = entry.name;
-    const filepath = entry.path;
-    const baseName = path.parse(filepath).name
-    console.log("HTML FOR ", `./${baseName}.html`)
+    const filepath = path.join(pathSrc, entry.path)
+    entryPoints[name] = filepath
+    const baseName = path.parse(entry.path).name
+    console.log("HTML FOR ", `./${baseName}.html`, " entry is at ", filepath)
 
     entries.push(new HtmlWebpackPlugin({
       title: name,
+      chunks: [name],
       template: path.join(pathLib, 'template', 'Html.js'),
       filename: `./${baseName}.html`,
     }))
     entries.push(new HtmlWebpackPlugin({
       title: `${baseName}-pdf`,
+      chunks: [name],
       template: path.join(pathLib, 'template', 'Html.js'),
       filename: `./${baseName}-pdf.html`,
     }))
@@ -79,7 +85,7 @@ async function getConfig() {
   }, [])
 
   return {
-    entry: path.join(pathSrc, 'presentation'),
+    entry: entryPoints, //path.join(pathSrc, 'index'),
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'lib/js/[name].js'
@@ -164,6 +170,8 @@ async function getConfig() {
         'reveal-plugins': path.join(pathLib, 'reveal-plugins'),
       }
     },
+
+    devtool: "eval-source-map",
 
     devServer: {
       contentBase: path.join(__dirname, "dist/"),

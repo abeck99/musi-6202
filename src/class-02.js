@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Section from 'lib/component/Section';
 
+import Presentation from 'lib/template/Presentation';
+
 import Counter from './example/component/Counter';
 import SineWave from './example/component/SineWave';
 import Table from './example/component/Table';
@@ -26,10 +28,10 @@ import image08 from './content/imgs/class-02/image08.png';
 import image09 from './content/imgs/class-02/image09.jpg';
 import image10 from './content/imgs/class-02/image10.jpg';
 
+const jsName = document.getElementById('reveal').attributes.jsName.value;
+const isPdf = jsName.endsWith("-pdf")
 
-
-export default function Class02(isPdf) {
-  return [
+const slides = [
     () => (
       <Section className="title-slide">
         <div className="center framed bordered font-passionone col-80 border-3x bg-warning-alpha-08">
@@ -141,7 +143,7 @@ export default function Class02(isPdf) {
     <div className="col-33"><MathComponent tex={String.raw`\omega_0 = \frac{2\pi}{T_0}`}/></div>
     </div>
     
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SineLineChart/>
     </div>
     </Section>
@@ -159,70 +161,70 @@ export default function Class02(isPdf) {
 ), () => (
     <Section>
     <h2>Sawtooth Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SawToothBuild isPdf={isPdf}/>
     </div>
     </Section>
 ), {target: 'pdf', slide: () => (
     <Section>
     <h2>Sawtooth Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SawToothBuild numHarmonics={2} isPdf={isPdf}/>
     </div>
     </Section>
 )}, {target: 'pdf', slide: () => (
     <Section>
     <h2>Sawtooth Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SawToothBuild numHarmonics={10} isPdf={isPdf}/>
     </div>
     </Section>
 )}, {target: 'pdf', slide: () => (
     <Section>
     <h2>Sawtooth Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SawToothBuild numHarmonics={20} isPdf={isPdf}/>
     </div>
     </Section>
 )}, {target: 'pdf', slide: () => (
     <Section>
     <h2>Sawtooth Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SawToothBuild numHarmonics={50} isPdf={isPdf}/>
     </div>
     </Section>
 )}, () => (
     <Section>
     <h2>Square Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SquareBuild isPdf={isPdf}/>
     </div>
     </Section>
 ), {target: 'pdf', slide: () => (
     <Section>
     <h2>Square Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SquareBuild numHarmonics={3} isPdf={isPdf}/>
     </div>
     </Section>
 )}, {target: 'pdf', slide: () => (
     <Section>
     <h2>Square Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SquareBuild numHarmonics={11} isPdf={isPdf}/>
     </div>
     </Section>
 )}, {target: 'pdf', slide: () => (
     <Section>
     <h2>Square Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SquareBuild numHarmonics={21} isPdf={isPdf}/>
     </div>
     </Section>
 )}, {target: 'pdf', slide: () => (
     <Section>
     <h2>Square Wave</h2>
-    <div className="center" style={{width: "800px", "padding-left": "100px", "padding-right": "100px"}}>
+    <div className="center" style={{width: "800px", "paddingLeft": "100px", "paddingRight": "100px"}}>
     <SquareBuild numHarmonics={51} isPdf={isPdf}/>
     </div>
     </Section>
@@ -373,4 +375,5 @@ PI = 3.14159265358
 * Special case: Ergodic signals can be described staticstically
 `
   ]
-}
+
+Presentation(slides, module.id)

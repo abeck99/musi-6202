@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Section from 'lib/component/Section';
 
+import Presentation from 'lib/template/Presentation';
+
 import Counter from './example/component/Counter';
 import SineWave from './example/component/SineWave';
 import Table from './example/component/Table';
@@ -10,9 +12,7 @@ import MyPieChart from './example/component/MyPieChart';
 import { MathComponent } from 'mathjax-react'
 import Fragment from 'lib/component/Fragment';
 
-
-export default function Class00(isPdf) {
-  return [
+const slides = [
     () => (
       <Section className="title-slide">
         <div className="center framed bordered font-passionone col-80 border-3x bg-warning-alpha-08">
@@ -135,4 +135,5 @@ export default function Class00(isPdf) {
 3. Buckle up
 `
   ]
-}
+
+Presentation(slides, module.id)

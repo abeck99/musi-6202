@@ -187,7 +187,7 @@ export default class Example extends PureComponent {
         <div className="center">{numHarmonics}</div>
       </div>
         <div className="col-12">
-        <div classNAme="right">
+        <div className="right">
         <a onClick={this.clickUp}><i className="fas fa-arrow-right"/></a>
         </div>
         </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Section from 'lib/component/Section';
 
+import Presentation from 'lib/template/Presentation';
+
 import Counter from './example/component/Counter';
 import SineWave from './example/component/SineWave';
 import Table from './example/component/Table';
@@ -18,8 +20,11 @@ import tascamImage from './content/imgs/class-01/TascamDA88.png';
 import cdImage from './content/imgs/class-01/cd.jpg';
 import freqDomainImage from './content/imgs/class-01/FreqDomain.png';
 
-export default function Class01(isPdf) {
-  return [
+const jsName = document.getElementById('reveal').attributes.jsName.value;
+const isPdf = jsName.endsWith("-pdf")
+
+
+const slides = [
     () => (
       <Section className="title-slide">
         <div className="center framed bordered font-passionone col-80 border-3x bg-warning-alpha-08">
@@ -220,4 +225,5 @@ export default function Class01(isPdf) {
 
       ),
   ]
-}
+
+Presentation(slides, module.id)
