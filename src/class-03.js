@@ -545,7 +545,7 @@ const slides = [
             <MathComponent tex={String.raw`\frac{1}{T}\int\limits_{-T/2}^{T/2}(x(t)-\mu_X)^2dt`} display={false}/>
           </div>
           <div className="col-40 center">
-            <MathComponent tex={String.raw`\int\limits_{-\infty}^{\infty}{xp_X(x)dx}`} display={false}/>
+            <MathComponent tex={String.raw`\int\limits_{-\infty}^{\infty} (x-\mu_X)^2p_X(x)dx`} display={false}/>
           </div>
         </div>
         <br/>

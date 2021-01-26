@@ -59,7 +59,7 @@ export default class Example extends PureComponent {
     } = this.state;
 
     const width = 900
-    const height = 500
+    const height = 400
 
     return (
       <div className="highlight-bar-charts small" style={{ userSelect: 'none' }}>
