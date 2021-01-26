@@ -83,6 +83,12 @@ hr {
 	}
 }
 
+.invert {
+  color: $backgroundColor;
+  background-color: $mainColor;
+}
+  
+
 /*********************************************
 * SPECIAL SLIDE CLASSES
 *********************************************/

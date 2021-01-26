@@ -118,6 +118,15 @@ async function getConfig() {
           },
         },
         {
+          test: /\.csv$/,
+          loader: 'csv-loader',
+          options: {
+            dynamicTyping: true,
+            header: true,
+            skipEmptyLines: true
+          }
+        },
+        {
           test: /\.(png|jpe?g|gif)$/i,
           use: [
             {
@@ -171,7 +180,7 @@ async function getConfig() {
       }
     },
 
-//    devtool: "eval-source-map",
+    devtool: "eval-source-map",
 
     devServer: {
       contentBase: path.join(__dirname, "dist/"),

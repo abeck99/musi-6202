@@ -67,6 +67,7 @@
     "@fortawesome/free-regular-svg-icons": "",
     "@fortawesome/free-solid-svg-icons": "",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "csv-loader": "^3.0.3",
     "highlight.js": "^9.17.1",
     "html-loader": "",
     "javascript-natural-sort": "",

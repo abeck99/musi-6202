@@ -40,6 +40,17 @@ body {
 	color: $mainColor;
 }
 
+.recharts-label {
+  font-family: $mainFont;
+  font-size: 10;
+  color: $mainColor;
+  fill: $mainColor;
+}
+
+.yAxis .recharts-label {
+  //transform: rotate(90deg);
+}  
+
 ::selection {
 	color: $selectionColor;
 	background: $selectionBackgroundColor;
@@ -299,6 +310,10 @@ body .reveal .slides section .fragment {
 
 		word-wrap: break-word;
 	}
+}
+
+.fa-ul li {
+  list-style-type: none;
 }
 
 $headingSizes: $heading1Size, $heading2Size, $heading3Size, $heading4Size;
