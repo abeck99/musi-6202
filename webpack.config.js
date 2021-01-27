@@ -135,6 +135,14 @@ async function getConfig() {
           ],
         },
         {
+          test: /\.(mp4)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
+        },
+        {
           test: /\.md$/,
           loader: 'html-loader!highlight-loader!markdown-loader'
         },

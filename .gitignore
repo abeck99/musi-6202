@@ -4,6 +4,8 @@
 
 *.wav
 
+..bfg-report/
+
 # Logs
 logs
 *.log
