@@ -115,7 +115,7 @@ const slides = [
         <b>Superposition</b> (additivity)
         </div>
         <div className="col-50">
-        <MathComponent tex={String.raw`(x+y) = f(x) + f(y)`}/>
+        <MathComponent tex={String.raw`f(x+y) = f(x) + f(y)`}/>
         </div>
         </div>
         </li>
@@ -470,10 +470,10 @@ const slides = [
         </div>
         <Fragment>
         <div className="row" style={{padding: "0px", margin: "0px", top: "-30px", position: "relative"}}>
-        <div className="col-14">
+        <div className="col-24">
         </div>
-        <div className="col-86">
-        <MathComponent tex={String.raw`= \int\limits_{-\infty}^{\infty}{h(\tau)\cdot x(t-\tau)} d\tau\nonumber`}/>
+        <div className="col-76">
+        <MathComponent tex={String.raw`= \int\limits_{-\infty}^{\infty}{h(t-\tau')\cdot x(\tau')}d(t-\tau')`}/>
         </div>
         </div>
         </Fragment>
@@ -500,15 +500,18 @@ const slides = [
     ), () => (
         <Section>
         <h3>Derivation: Associativity</h3>
-        <div className="smaller"><MathComponent tex={String.raw`\big(g(t) \ast h(t)\big) \ast x(t) = g(t) \ast \big(h(t) \ast x(t)\big)`}/></div>
-        <div className="smaller">Changing the order of sums and shifting the operands as shown below</div>
-        <div className="smaller">
-        <div style={{position: "relative", top: "-20px"}}>
+          <div className="smaller"><MathComponent tex={String.raw`\big(g(t) \ast h(t)\big) \ast x(t) = g(t) \ast \big(h(t) \ast x(t)\big)`}/></div>
+          <div className="row">
+          <div className="col-20">
+        <div className="smaller">Changing the order of sums and shifting the operands as shown</div>
+        </div>
+        <div className="smaller col-80">
+        <div style={{position: "relative", top: "-30px"}}>
         <MathComponent tex={String.raw`\big(g(t) \ast h(t)\big) \ast x(t) = \int\limits_{\tau=-\infty}^{\infty}{\big(g(\tau) \ast h(\tau)\big)\cdot x(t-\tau)}d\tau`}/>
         </div>
 
         <Fragment>
-        <div className="row"style={{position: "relative", top: "-65px"}}>
+        <div className="row"style={{position: "relative", top: "-75px", left:"23px"}}>
         <div className="col-28">
         </div>
         <div className="col-72">
@@ -518,7 +521,7 @@ const slides = [
         </Fragment>
 
         <Fragment>
-        <div className="row" style={{position: "relative", top: "-110px"}}>
+        <div className="row" style={{position: "relative", top: "-120px", left:"23px"}}>
         <div className="col-28">
         </div>
         <div className="col-72">
@@ -528,7 +531,7 @@ const slides = [
         </Fragment>
 
         <Fragment>
-        <div className="row" style={{position: "relative", top: "-145px"}}>
+        <div className="row" style={{position: "relative", top: "-155px", left:"27px"}}>
         <div className="col-30">
         </div>
         <div className="col-70">
@@ -538,7 +541,7 @@ const slides = [
         </Fragment>
 
         <Fragment>
-        <div className="row" style={{position: "relative", top: "-190px"}}>
+        <div className="row" style={{position: "relative", top: "-200px", left:"21px"}}>
         <div className="col-23">
         </div>
         <div className="col-77">
@@ -548,7 +551,7 @@ const slides = [
         </Fragment>
 
         <Fragment>
-        <div className="row" style={{position: "relative", top: "-235px", left:"-38px"}}>
+        <div className="row" style={{position: "relative", top: "-245px", left:"-20px"}}>
         <div className="col-15">
         </div>
         <div className="col-85">
@@ -557,6 +560,7 @@ const slides = [
         </div>
         </Fragment>
 
+        </div>
         </div>
         
         </Section>
