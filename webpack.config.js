@@ -18,6 +18,11 @@ const pathSrc = path.join(pathBase, 'src');
 const pathLib = path.join(pathBase, 'lib');
 const pathDist = path.join(pathBase, 'dist');
 
+// TODO: Add eval-source-map to dev/live version
+// TODO: Add "mode: 'development'" for dev/live version
+// TODO: Remove minification for live version
+// TODO: Look into collapse_vars settings - is there an issue with font awesome and collapse vars?
+
 const getEntries = function(filepath) {
   return fs.readdirSync(filepath)
     .filter(file => file.match(/^(class.*\.js|index\.js)$/))
@@ -86,23 +91,26 @@ async function getConfig() {
 
   return {
     entry: entryPoints, //path.join(pathSrc, 'index'),
+    mode: 'production',
+
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'lib/js/[name].js'
     },
 
     optimization: {
+      minimize: true,
       minimizer: [
         new TerserPlugin({
           terserOptions: {
             compress: {
               // // see https://github.com/FortAwesome/Font-Awesome/
               // // and https://github.com/fabiosantoscode/terser/issues/50
-              // collapse_vars: true,
+              collapse_vars: true,
             },
             output: null,
           },
-          sourceMap: true
+          sourceMap: false
         }),
         new OptimizeCSSAssetsPlugin({})
       ]
@@ -188,7 +196,7 @@ async function getConfig() {
       }
     },
 
-    devtool: "eval-source-map",
+    // devtool: "eval-source-map",
 
     devServer: {
       contentBase: path.join(__dirname, "dist/"),
