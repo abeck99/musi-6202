@@ -42,7 +42,7 @@ const slides = [
         <Section>
         <h2>Correlation Function</h2>
         <br/>
-        <List icon="fa-angle-double-right">
+        <List>
         <div>Indicates (linear) dependencies between two signals</div>
         <div>Shifts the signals to find the dependency for each shift in time</div>
         </List>
@@ -57,7 +57,7 @@ const slides = [
         
         <Fragment><div className="row">
         <div className="col-30">
-        <List icon="fa-angle-double-right"><div>Continuous:</div></List>
+        <List><div>Continuous:</div></List>
         </div>
         <div className="col-70">
         <MathComponent tex={String.raw`r_\mathrm{xy}(\tau) = \int\limits_{-\infty}^{\infty}{x(t)\cdot y(t+\tau)dt}`}/>
@@ -66,7 +66,7 @@ const slides = [
 
         <Fragment><div className="row">
         <div className="col-30">
-        <List icon="fa-angle-double-right"><div>Discrete:</div></List>
+        <List><div>Discrete:</div></List>
         </div>
         <div className="col-70">
         <MathComponent tex={String.raw`r_\mathrm{xy}(\eta) = \sum\limits_{i=-\infty}^{\infty}{x(i)\cdot y(i+\eta)}`}/>
@@ -101,13 +101,13 @@ const slides = [
     ), () => (
         <Section>
         <h2>Use Cases</h2>
-        <List icon="fa-angle-double-right">
+        <List>
         <div>Find (linear!) similarity between two signals (e.g., clean and noisy)</div>
         <div>Find time shift between two similar signals</div>
         </List><br/>
         <Fragment>
         <h4>Example: <b>Radar</b></h4>
-        <List icon="fa-angle-double-right">
+        <List>
         <div>Correlate sent signal with received signal</div>
         <div>Pick maximum location and convert to distance of object</div>
         </List>
@@ -128,7 +128,7 @@ const slides = [
         <h4>Possible reasons for normalization</h4>
         </Fragment>
         <Fragment>
-        <List icon="fa-angle-double-right">
+        <List>
         <div>Ensuring that function will always be between -1 and 1</div>
         <div>Shifting and scaling one signal will not change the coefficient</div>
         </List>
@@ -151,7 +151,7 @@ const slides = [
         <p>Anscombes quartet</p>
         </div>
         <div className="col-70">
-        <List icon="fa-angle-double-right">
+        <List>
         <div>Identical Mean: 7.5</div>
         <div>Identical Variance: 4.2</div>
         <div>Identical <b>Pearson correlation coefficient</b>: 0.816</div>
@@ -196,19 +196,19 @@ const slides = [
         <h3>Autocorrelation Function</h3>
         <MathComponent tex={String.raw`r_\mathrm{xx}(\tau)=\mathcal{E}\lbrace x(t)x(t+\tau)\rbrace`}/>
         <Fragment index={1}><h4>Autocorrelation function properties</h4>
-        <List icon="fa-angle-double-right" overrides={{2: "none"}}>
+        <List overrides={{2: "none"}}>
         <div><b>Power:</b> &nbsp;<MathComponent tex={String.raw`r_{xx}(0) = 	\mathcal{E}\lbrace X^2\rbrace`} display={false}/></div>
         <div><b>Symmetry:</b> &nbsp;<MathComponent tex={String.raw`r_{xx}(\tau)=r_{xx}(-\tau)`} display={false}/></div>
         <div>(substitute <MathComponent tex={String.raw`t=t'+\tau`} display={false}/>)</div>
         </List>
         </Fragment>
         <Fragment index={2}>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div><b>Global Max:</b> &nbsp;<MathComponent tex={String.raw`r_{xx}(\tau)\leq r_{xx}(0)`} display={false}/></div>
         </List>
         </Fragment>
         <Fragment index={4}>
-        <List icon="fa-angle-double-right" overrides={{1:"none"}}>
+        <List overrides={{1:"none"}}>
         <div><b>Periodicity:</b></div>
         <div>The ACF of a periodic signal is periodic (period length of input signal)</div>
         </List>
@@ -224,7 +224,7 @@ const slides = [
     ), () => (
         <Section>
         <h3>Summary</h3>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div>Correlation Function is useful tool to</div>
         </List>
         <div className="center">
@@ -233,12 +233,12 @@ const slides = [
         <p><b>Identify periodicity</b> vs. noisiness in a signal (ACF)</p>
         </div>
         <Fragment>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div>Continues to be standard approach for all applications related to the above tasks</div>
         </List>
         </Fragment>
         <Fragment>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div>Note: CCF or ACF do not display time information (lost in integration)</div>
         </List>
         </Fragment>

@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import Fragment from 'lib/component/Fragment';
 
+const defaultProps = {
+  icon: "fa-angle-double-right",
+  overrides: [],
+  fragment: false,
+  align: "left",
+}
+
 export default class List extends Component {
   render() {
-    var { fragment } = this.props
-    const { children, icon, overrides } = this.props
+    const props = {
+      ...defaultProps,
+      ...this.props,
+    }
+    
+    var { fragment } = props
+    const { children, icon, overrides } = props
     const overrides_ = overrides == undefined ? {} : overrides
 
     const fragmentAll = fragment == "all"
@@ -13,7 +25,7 @@ export default class List extends Component {
     const children_ = Array.isArray(children) ? children : [children]
 
     return (
-      <div className="left">
+      <div className={props.align}>
         <ul className="fa-ul">
           {
             children_.map((child, i) => {

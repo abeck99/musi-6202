@@ -40,14 +40,14 @@ const slides = [
     ), () => (
         <Section>
         <h3>Systems</h3>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div>Any process producing an output signal in response to an input signal</div>
         </List>
         <img src={image00} style={{width:"75%"}}/>
         <br/>
         <Fragment><h4>Examples of systems in signal processing</h4></Fragment>
         <div className="smaller">
-        <List icon="fa-angle-double-right" overrides={{}} fragment="all">
+        <List fragment="all">
         <div>Filters, Effects</div>
         <div>Vocal Tract</div>
         <div>Room</div>
@@ -63,7 +63,7 @@ const slides = [
         <div className="col-70">
         <h4>Examples for (mostly) linear systems</h4>
         <div className="normal">
-        <List icon="fa-angle-double-right" overrides={{}} fragment="all">
+        <List fragment="all">
         <div>Room</div>
         <div>EQ</div>
         <div>Echo</div>
@@ -80,7 +80,7 @@ const slides = [
         <div className="col-70">
         <h4>Examples for non-linear systems</h4>
         <div className="normal">
-        <List icon="fa-angle-double-right" overrides={{}} fragment={true}>
+        <List fragment={true}>
         <div>Diode</div>
         <div>Vacuum Tube</div>
         <div>Optical Compressor</div>
@@ -134,7 +134,7 @@ const slides = [
         <div className="left">Systems with these constraints are a great simplification for many real-world systems we would like to model:</div>
         <br/>
         <div className="normal">
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div>Circuits</div>
         <div>Spring-Mass-Damper</div>
         <div>Reverbs</div>
@@ -165,7 +165,7 @@ const slides = [
         <Section>
         <h3>Other LTI system characteristics</h3>
         <br/>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div><p><b>Causality:</b></p>Output depends only on past and present input</div>
         <div><p><b>BIBO Stability:</b></p>Output is bounded for bounded input</div>
         </List>
@@ -175,7 +175,7 @@ const slides = [
         <h3>Convolution</h3>
         <div className="small"><p><i>It's easy to visualize how a system reacts to an impulse, but what about a more complex input signal?'</i></p></div>
         <div className="normal">
-        <List icon="fa-angle-double-right" overrides={{}} fragment="all">
+        <List fragment="all">
         <div>Assume that the signal is constructed from many densely packed impulses (impulse train)</div>
         <div>Output is then a superposition of all individual responses</div>
         <div>For discrete systems this is literal, use integration</div>
@@ -443,7 +443,7 @@ const slides = [
         <h3>Identity and Impulse Response</h3>
         <MathComponent tex={String.raw`x(t) = \delta(t)\ast x(t)`}/>
         <MathComponent tex={String.raw`h(t) = \delta(t)\ast h(t)`}/>
-        <List icon="fa-angle-double-right" overrides={{}} fragment={true}>
+        <List fragment={true}>
         <div>Describes the response of a system to an impulse as a function of time</div>
         <div>As an impulse includes all frequency, the resulting IR defines the response for all frequencies</div>
         <div>The convolution of <MathComponent tex={String.raw`\delta(t)`} display={false}/> with a signal/impulse response results in that impulse response</div>
@@ -453,7 +453,7 @@ const slides = [
         <Section>
         <div className="smaller"><MathComponent tex={String.raw`y(t) = x(t) \ast h(t) = \int\limits_{-\infty}^{\infty}{h(\tau)\cdot x(t-\tau)} d\tau`}/></div>
         <h4>Convolution - Properties</h4>
-        <List icon="fa-angle-double-right" overrides={{}} fragment={true}>
+        <List fragment={true}>
         <div><div className="row"><div className="col-30"><b>Commutativity</b></div><div className="col-70"><MathComponent tex={String.raw`h(t) \ast x(t)	= x(t) \ast h(t)`}/></div></div></div>
         <div><div className="row"><div className="col-30"><b>Associativity</b></div><div className="col-70"><MathComponent tex={String.raw`\big(g(t) \ast h(t)\big) \ast x(t) = g(t) \ast \big(h(t) \ast x(t)\big)`}/></div></div></div>
         <div><div className="row"><div className="col-30"><b>Distributivity</b></div><div className="col-75"><MathComponent tex={String.raw`g(t) \ast \big(h(t) + x(t)\big) = \big(g(t) \ast h(t)\big) + \big(g(t) \ast x(t)\big)`}/></div></div></div>
@@ -604,13 +604,13 @@ const slides = [
     ), () => (
         <Section>
         <h3>Importance of convolution for audio DSP</h3>
-        <List icon="fa-angle-double-right" overrides={{}}>
+        <List>
         <div>Ability to model LTI systems</div>
         <div>Used both as a runtime technique and mathematical tool</div>
         </List>
         <Fragment>
         <h4>Uses</h4>
-        <List icon="fa-angle-double-right" overrides={{}} fragment={true}>
+        <List fragment={true}>
         <div>FIR Filters</div>
         <div>Reverbs</div>
         <div>Windowing effects</div>
@@ -629,7 +629,7 @@ const slides = [
     ), () => (
         <Section>
         <h3>Summary - LTI</h3>
-        <List icon="fa-angle-double-right" overrides={{}} fragment={true}>
+        <List fragment={true}>
         <div>Many real-world systems can be approximated by an <b>LTI system</b></div>
         <div>Properties of an LTI system:
         <ol>
@@ -652,7 +652,7 @@ const slides = [
         <h3>Summary - Convolution</h3>
         <br/>
         <div className="left">Convolution:</div>
-        <List icon="fa-angle-double-right" overrides={{}} fragment={true}>
+        <List fragment={true}>
         <div>Describes the process of generating the output of an LTI system from the input</div>
         <div>Is commutative</div>
         <div>Is associative</div>

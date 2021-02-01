@@ -48,17 +48,17 @@ const slides = [
         <h3>Describing Random Signals</h3>
         <br/>
         <div className="left">
-        <List icon="fa-angle-double-right" overrides={{1:"none"}}>
+        <List overrides={{1:"none"}}>
         <div>Ergodic signals do not have a functional description</div>
         <div>Other ways of describing these signals have to be found</div>
         </List>
         <br/><br/>
-        <List icon="fa-angle-double-right" overrides={{1:"none"}}>
+        <List overrides={{1:"none"}}>
         <div>Ergodic signal characteristics are not time variant</div>
         <div>We are looking for <b>time-independent descriptions</b></div>
         </List>
         <br/><br/>
-        <List icon="fa-angle-double-right" overrides={{1:"none"}}>
+        <List overrides={{1:"none"}}>
         <div>These descriptions might also be convenient to use for some deterministic signals</div>
         </List>
         </div>
@@ -73,11 +73,11 @@ const slides = [
         <p><MathComponent tex={String.raw`N(x_i)`} display={false}/>: number of occurences of symbol <MathComponent tex={String.raw`x_i`} display={false}/></p>
         <br/>
         <Table leftSize="60">
-        <List icon="fa-angle-double-right" overrides={{1:"none"}}>
+        <List overrides={{1:"none"}}>
         <div>Relative number of occurrences:</div>
         </List>
         <MathComponent tex={String.raw`\hat{p}_i = \frac{N(x_i)}{N}`} display={false}/>
-        <List icon="fa-angle-double-right" overrides={{1:"none"}}>
+        <List overrides={{1:"none"}}>
         <div>Probability:</div>
         </List>
         <MathComponent tex={String.raw`p_i = \lim\limits_{N\rightarrow\infty} \frac{N(x_i)}{N}`} display={false}/>
@@ -435,7 +435,7 @@ const slides = [
         </div>
         <Fragment>
           <p>Examples</p>
-          <List icon="fa-angle-double-right">
+          <List>
             <div>Mean: <MathComponent tex={String.raw`f(x) = x`} display={false}/></div>
             <div>Quad. Mean: <MathComponent tex={String.raw`f(x) = x^2`} display={false}/></div>
           </List>
@@ -449,7 +449,7 @@ const slides = [
       <Section>
         <div className="row">
           <div className="col-30 normal">
-            <List icon="fa-angle-double-right">
+            <List>
               <div><MathComponent tex={String.raw`k`} display={false}/>th moment: </div>
             </List>
           </div>
@@ -460,7 +460,7 @@ const slides = [
         <Fragment>
         <div className="row">
           <div className="col-30 normal">
-            <List icon="fa-angle-double-right">
+            <List>
               <div><MathComponent tex={String.raw`k`} display={false}/>th central moment: </div>
             </List>
           </div>
@@ -471,7 +471,7 @@ const slides = [
         </Fragment>
 
         <Fragment>
-        <List icon="fa-angle-double-right">
+        <List>
           <div className="normal">Example: 2nd order central moment: <b>Variance</b></div>
         </List>
           <div className="normal"><MathComponent tex={String.raw`\sigma_X^2 = \mathcal{E}\lbrace  (X-\mu_X)^2\rbrace  = \int\limits_{-\infty}^{+\infty}(x-\mu_X)^2 p_X(x)dx`}/></div>
@@ -495,7 +495,7 @@ const slides = [
       <Section>
         <h2>Calculation of Moments</h2>
         <p><div className="center">(Central) moments (mean, power, variance, etc.) can be computed from:</div></p>
-        <List icon="fa-angle-double-right">
+        <List>
           <div>The signal</div>
           <div>The signal's PDF</div>
         </List>
@@ -602,7 +602,7 @@ const slides = [
       <Section>
         <h3>Summary</h3>
         <div className="normal">
-        <List icon="fa-angle-double-right">
+        <List>
         <div>PDF can tell us many important details about a signal</div>
         <div>Statistical measures can be used to describe signal properties</div>
         <div>Statistical measures can be derived from both the time domain signal and it's PDF</div>
