@@ -188,6 +188,7 @@ const slides = [
       <br/>
       <Fragment><div className="normal">Multiply a <b>window</b> with the signal</div></Fragment>
       <aside className="notes">
+        <p>Infinite signals not practical in real world uses - need to look at snippets</p>
         <div>Examples: FT of:
           <ol>
             <li>Delta Function</li>
@@ -240,6 +241,10 @@ const slides = [
       <div className="heading smaller">Cosine</div>
       <WinFreqPlot width={900} height={200} winData={winCosine} dbData={dbCosine}/>
       <aside className="notes">
+      <p>These were made by a simple sine</p>
+      <p>Fourier transform of a sine is the delta function</p>
+      <p>Bands are a convolution of window FT and delta function</p>
+      <p>This is a clean example, but bands can cause lots of trouble in real world signals</p>
       </aside>
     </Section>
   ),
@@ -274,6 +279,11 @@ const slides = [
       <MathComponent tex={String.raw`w_{\mathrm{R}}(t) = \left\lbrace \begin{array}{ll} 1, & -\frac{1}{2} \leq t \leq \frac{1}{2} \cr  0, & \text{otherwise} \end{array}\right.`}/>
       <WinFreqPlot width={900} height={400} winData={winRect} dbData={dbRect}/>
       <aside className="notes">
+        <p>Don't need to remember these equations, this is here for reference, and easily googleable</p>
+        <p>Main lobe width helps identify frequencies really well</p>
+        <p>Rect has smallest main lobe width, but noise is really high</p>
+        <p>Practically, you would use von hann or hamming, and it will likely be fine</p>
+        <p>Rect window is almost always wrong</p>
         <p>Main Lobe Width</p>
         <p>Side Lobe Height</p>
         <p>Side Lobe Attenuation</p>
@@ -326,6 +336,7 @@ const slides = [
       <MathComponent tex={String.raw`w_{\mathrm{Hm}}(t) = w_{\mathrm{R}}(t) \cdot (\frac{25}{46} + \frac{21}{46} \cos(2 \pi t))`}/>
       <WinFreqPlot width={900} height={400} winData={winHamming} dbData={dbHamming}/>
       <aside className="notes">
+        <p>Based on cosine</p>
         <p>Main Lobe Width</p>
         <p>Side Lobe Height</p>
         <p>Side Lobe Attenuation</p>
@@ -381,6 +392,11 @@ const slides = [
         <p>Model of sampling - multiply continuous signal by pulse train</p>
         <p>Multiply in time domain, convolution in frequency domain</p>
         <p>What do you get when convolving with a pulse train? Spectrum will be periodic</p>
+        <p>Still a continuous fourier transform, just time discrete input</p>
+        <p>We have the opposite from the fourier series</p>
+        <p>Fourier series: Periodic in time domain, discrete in frequency domain</p>
+        <p>Sampled FT: Discrete in time domain, periodic in frequency domain</p>
+        <p>Equilivancy between time and frequency</p>
       </aside>
     </Section>
   ),
@@ -421,6 +437,10 @@ const slides = [
         </List>
       </Fragment>
       <aside className="notes">
+      <p>Taking the time domain sampling from earlier, and make frequencies discrete</p>
+      <p>Fourier Transform is always continuous, DFT is the explicitly discrete version</p>
+      <p>Still complex</p>
+      <p>k is an index, easy to convert to frequency</p>
       </aside>
     </Section>
   ),
@@ -442,6 +462,12 @@ const slides = [
         <div>Zero-padding can increase resolution without decreasing time resolution</div>
       </List>
       <aside className="notes">
+        <p>Delta_omega is distance between frequency bins, each bin is equidistant</p>
+        <p>frequency is simple Delta_omega * k (index)</p>
+        <p>Linear difference between bins is a problem for how we hear</p>
+        <p>In music, semitone distance is based on ratio, not on absolute frequency difference</p>
+        <p>When dealing with low pitched notes, you may need a very large window</p>
+        <p>Mp3 encoder will adjust window size based on tonal vs transients, a comprimise between long windows and fine frequency content but "smeared" time</p>
       </aside>
     </Section>
   ),
@@ -473,8 +499,11 @@ const slides = [
                     ["4096", "2^24", "24576", "683 : 1"],
                   ]}/>
       </div>
-      
+
       <aside className="notes">
+        <p>Primarily reducing redundant operations, adding constrants (power of two constraint)</p>
+        <p>The reason why convolution in frequncy domain is so much faster than in time domain</p>
+        <p>Often using zero padding to achieve power of two</p>
       </aside>
     </Section>
   ),
@@ -498,6 +527,8 @@ const slides = [
         </Fragment>
       </div>
       <aside className="notes">
+      <p>You should not just view this abstractly, get your hands dirty, trying different windows</p>
+      <p>All properties we talked about before are true for all these variations of fourier series/transform</p>
       </aside>
     </Section>
   )

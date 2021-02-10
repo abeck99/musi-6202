@@ -71,6 +71,7 @@ const slides = [
           <div><p>Amplitude discretization:</p><b>Quantization</b></div>
         </List>
       <aside className="notes">
+      <p>In this lecture we'll just talk about sampling</p>
       </aside>
       </Section>
   ),
@@ -90,6 +91,11 @@ const slides = [
         </div>
       </Fragment>
       <aside className="notes">
+      <p>Sampling rate related to sampling period</p>
+      <p>Equidistant points</p>
+      <p>All we need to know to play it back, is how far apart in seconds each sample is</p>
+      <p>Speech bandwidth low compared to music</p>
+      <p>Pro audio can be 192khz</p>
       </aside>
       </Section>
   ),
@@ -99,6 +105,9 @@ const slides = [
       <Animate images={[samplingAmbi1, samplingAmbi2, samplingAmbi3, samplingAmbi4, samplingAmbi5, samplingAmbi6, samplingAmbi7]}
                animSpeed={2}/>
       <aside className="notes">
+      <p>Just looking at the sample points, you think this must be a sine at this frequency</p>
+      <p>You could be wrong though</p>
+      <p>We cannot know what the input frequency is with sampling</p>
       </aside>
       </Section>
   ),
@@ -152,6 +161,9 @@ const slides = [
         </div>
       </div>
       <aside className="notes">
+      <p>To use the 6khz example, when you have a single 1khz tone, it will peak at 5, 7, 11, 13, etc</p>
+      <p>No way to determine original pitch</p>
+      <p>If we have a good filter, we could remove stuff from outside the desired bandwidth</p>
       </aside>
     </Section>
   ),
@@ -239,6 +251,7 @@ const slides = [
         <p>Continuous Output Signal</p>
       </div>
       <aside className="notes">
+      <p>Reconstruction Filter is another filter to cut off periodic repetitions before final output signal</p>
       </aside>
     </Section>
   ),
@@ -255,8 +268,11 @@ const slides = [
       </div>
 
       <br/>
+      <Fragment>
       Band of interest does not have to be base band (<MathComponent tex={String.raw`0 ... \frac{f_S}{2}`} display={false}/>), but any band (<MathComponent tex={String.raw`k \cdot \frac{f_S}{2} ... (k + 1) \cdot \frac{f_S}{2}`} display={false}/> as long as the <b>bandwidth</b> is not wider, and unwanted frequencies are filtered out.
+      </Fragment>
       <aside className="notes">
+      <p>Band of interest, just set anti-aliasing and reconstruction filters to focus on band of interest</p>
       </aside>
     </Section>
   )
