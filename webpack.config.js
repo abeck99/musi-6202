@@ -135,7 +135,7 @@ async function getConfig() {
           }
         },
         {
-          test: /\.(png|jpe?g|gif)$/i,
+          test: /\.(png|jpe?g|gif|mp3)$/i,
           use: [
             {
               loader: 'file-loader',

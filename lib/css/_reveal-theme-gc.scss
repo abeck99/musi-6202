@@ -261,6 +261,14 @@ $list-style-type: (
   opacity: 0.25;
 }
 
+.reveal .windowPlot-200 .yAxis .recharts-label {
+  transform: translate(-50px, 90px) rotate(270deg);
+}
+
+.reveal .windowPlot-400 .yAxis .recharts-label {
+  transform: translate(-150px, 190px) rotate(270deg);
+}
+
 .reveal .slides section .fragment.step-fade-in-then-out {
 	opacity: 0;
 	display: none; }
