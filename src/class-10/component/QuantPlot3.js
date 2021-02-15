@@ -7,15 +7,15 @@ import {
 } from 'react-annotation'
 import { MathComponent } from 'mathjax-react'
 
-import quantErr02 from '../data/3.33hz-quant-err-04.csv'
-import quantErr04 from '../data/3.33hz-quant-err-16.csv'
-import quantErr08 from '../data/3.33hz-quant-err-256.csv'
-import quantErr12 from '../data/3.33hz-quant-err-4096.csv'
+import quantErr02 from '../data/2hz-quant-err-04.csv'
+import quantErr04 from '../data/2hz-quant-err-16.csv'
+import quantErr08 from '../data/2hz-quant-err-256.csv'
+import quantErr12 from '../data/2hz-quant-err-4096.csv'
 
-import quantErrSpec02 from '../data/3.33hz-quant-err-spec-04.csv'
-import quantErrSpec04 from '../data/3.33hz-quant-err-spec-16.csv'
-import quantErrSpec08 from '../data/3.33hz-quant-err-spec-256.csv'
-import quantErrSpec12 from '../data/3.33hz-quant-err-spec-4096.csv'
+import quantErrSpec02 from '../data/2hz-quant-err-spec-04.csv'
+import quantErrSpec04 from '../data/2hz-quant-err-spec-16.csv'
+import quantErrSpec08 from '../data/2hz-quant-err-spec-256.csv'
+import quantErrSpec12 from '../data/2hz-quant-err-spec-4096.csv'
 
 class YAxisLabelLeftA extends PureComponent {
   render() {
@@ -110,11 +110,11 @@ export default class Example extends PureComponent {
     const halfWidth = width / 2
     const fourthHeight = height / 4
 
-    const timeAmpTop = 0
-    const timeAmpBot = -0.4
+    const timeAmpTop = 0.25
+    const timeAmpBot = -0.25
 
     const timeAmpWid = 80
-    const timeAmpTicks = [-0.4, -0.2, 0]
+    const timeAmpTicks = [-0.2, 0, 0.2]
 
     const freqDbTop = 0
     const freqDbBot = -90
@@ -146,7 +146,7 @@ export default class Example extends PureComponent {
                   width={timeAmpWid}
                   type="number"
                   yAxisId="1"
-      ticks= {timeAmpTicks}
+      tick= {false}
                   label={<YAxisLabelLeftA/>}
                 />
                 <Line yAxisId="1" type="step" dataKey="val" stroke="#fcf8e3" dot={<div/>} strokeWidth="3px" isAnimationActive={false} />
@@ -206,7 +206,7 @@ export default class Example extends PureComponent {
                   allowDataOverflow
                   domain={[timeAmpBot, timeAmpTop]}
                   width={timeAmpWid}
-      ticks= {timeAmpTicks}
+      tick= {false}
                   type="number"
                   yAxisId="1"
                   label={<YAxisLabelLeftB/>}
@@ -268,7 +268,7 @@ export default class Example extends PureComponent {
                   allowDataOverflow
                   domain={[timeAmpBot, timeAmpTop]}
                   width={timeAmpWid}
-      ticks= {timeAmpTicks}
+      tick= {false}
                   type="number"
                   yAxisId="1"
                   label={<YAxisLabelLeftC/>}
@@ -330,7 +330,7 @@ export default class Example extends PureComponent {
                   allowDataOverflow
                   domain={[timeAmpBot, timeAmpTop]}
                   width={timeAmpWid}
-      ticks= {timeAmpTicks}
+      tick= {false}
                   type="number"
                   yAxisId="1"
                   label={<YAxisLabelLeftD/>}

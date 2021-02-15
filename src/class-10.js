@@ -87,6 +87,9 @@ const slides = [
       <br/>
       <div className="center">Andrew Beck</div>
       <aside className="notes">
+      <p>Working in digital domain, moving from continuous to discrete</p>
+      <p>Last time talked about sampling, what effects that has</p>
+      <p>Today talking about quantization</p>
       </aside>
     </Section>
   ),
@@ -109,6 +112,10 @@ const slides = [
       </div>
       </Fragment>
       <aside className="notes">
+      <p>Unlike sampling, quantization is irreversible</p>
+      <p>We have two fundamental types of quantization</p>
+      <p>First "skips" 0, gives an even distribution</p>
+      <p>Mid-tread will give slightly uneven distribution of amplitudes</p>
       </aside>
     </Section>
   ),
@@ -120,6 +127,9 @@ const slides = [
       <div><b>Word Length (bits):</b> <MathComponent tex={String.raw`w = \log_2(\mathcal{M}) = 4\mathrm{bit}`} display={false}/></div>
       </List>
       <aside className="notes">
+      <p>This is mid-tread, uneven distribution</p>
+      <p>16 steps - 4 bit word, this is 4-bit quantizer leads to 16 steps</p>
+      <p>Converting from steps to word size is simply log_2</p>
       </aside>
     </Section>
   ),
@@ -145,6 +155,12 @@ const slides = [
       ["","24","16777216",""],
     ]}/>
       <aside className="notes">
+      <p>This is pretty trivial information</p>
+      <p>Worth looking at how this scales up</p>
+      <p>8-bit is typically the minimum</p>
+      <p>16-bit is "CD quality", why when you zoom into wave form you typically don't see the quantization steps</p>
+      <p>24-bit typically for production</p>
+      <p>We'll revisit this bit depths and usage later</p>
       </aside>
     </Section>
   ),
@@ -154,6 +170,20 @@ const slides = [
       <img src={image01}/>
       <MathComponent tex={String.raw`q(i) = x_{\mathrm{Q}}(i) - x(i)`}/>
       <aside className="notes">
+      <p>By quantizing, we introduce an error</p>
+      <p>In this class, we'll label it "q", but there is no standard</p>
+      <p>Simple to compute the error, subtract the value from the quantized</p>
+      <p>n or i in this slide are all the same</p>
+      <p>What is the maximum amplitude of the quantization error</p>
+      <p>Half the step size</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h2>What is the maximum amplitude of the quantization error?</h2>
+      <aside className="notes">
+      <p>Half the step size</p>
       </aside>
     </Section>
   ),
@@ -170,6 +200,16 @@ const slides = [
       </div>
       <MathComponent tex={String.raw`|q(i)| \leq \frac{\Delta}{2}`}/>
       <aside className="notes">
+      <p>It's not ALWAYS spiky like this, this is a special case of an input sinusodial</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h2>What is the PDF of the quantization error?</h2>
+      <aside className="notes">
+      <p>Will be symmetric</p>
+      <p>Most of error is pretty uniformly distributed</p>
       </aside>
     </Section>
   ),
@@ -180,6 +220,10 @@ const slides = [
       <br/>
       <img src={image03} style={{width: "40%"}}/>
       <aside className="notes">
+      <p>One way to think about it - we have the input signal PDF</p>
+      <p>If we add up all the error inside the input PDF</p>
+      <p>What is the maximum of this uniform PDF?</p>
+      <p>1 / over delta</p>
       </aside>
     </Section>
   ),
@@ -190,6 +234,8 @@ const slides = [
       <br/>
       <img src={image04} style={{width: "60%"}}/>
       <aside className="notes">
+      <p>Let's look at this a little closer</p>
+      <p>What happens when the noise level is high</p>
       </aside>
     </Section>
   ),
@@ -206,6 +252,22 @@ const slides = [
       <img src={image05} style={{width:"85%"}}/>
       
       <aside className="notes">
+      <p>Depending on the input signal, the uniform distribution outlook breaks down</p>
+      <p>The power of quantization error levels out</p>
+      <p>Once the variance is higher than the step size, it levels out</p>
+      <p>Moving forward, we assume that the step size is much smaller than the variance</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h2>How to computer the power <MathComponent tex={String.raw`W_\mathrm{Q}`} display={false}/> of Quantization Error?</h2>
+      <aside className="notes">
+      <p>Think back about PDFs, values we expect</p>
+      <p>Mean, variance, etc</p>
+      <p>What's the difference between variance and power?</p>
+      <p>How do I compute variance?</p>
+      <p>Sum of values minus expected value</p>
       </aside>
     </Section>
   ),
@@ -243,6 +305,8 @@ const slides = [
       </div>
       </div>
       <aside className="notes">
+      <p>1/Delta * integral</p>
+      <p>Quantization ONLY depends on step size</p>
       </aside>
     </Section>
   ),
@@ -255,6 +319,9 @@ const slides = [
       <div className="col-50 center">Frequency</div>
       </div>
       <aside className="notes">
+      <p>Obviously quantization error becomes smaller with higher bit size</p>
+      <p>We want to avoid this correlation</p>
+      <p>Harmonic noise, think of sine becoming a square</p>
       </aside>
     </Section>
   ),
@@ -358,6 +425,11 @@ const slides = [
     </List>
     </div>
       <aside className="notes">
+      <p>SNR is a very established way to describe noise related to signal</p>
+      <p>Decibels is not just the ratio, but the log</p>
+      <p>Why?</p>
+      <p>Not exactly how we perceive sound, but very good approximitation</p>
+      <p>Perception is relative, similar to frequency, a lot of sensory input works this way</p>
       </aside>
     </Section>
   ),
@@ -391,6 +463,10 @@ const slides = [
     </Fragment>
     </div>
       <aside className="notes">
+      <p>Full scale meaning going from -1 to 1</p>
+      <p>Again, word length is the dependant part - SNR depends only on it</p>
+      <p>Relationship in dB domain is linear</p>
+      <p>If we increase w by 1, it goes up by about 6dB</p>
       </aside>
     </Section>
   ),
@@ -456,6 +532,8 @@ const slides = [
       <br/>
       <img src={image06}/>
       <aside className="notes">
+             <p>Human dynamic range is about up to 120dB</p>
+             <p>Non-linear quantization happens in floating-point</p>
       </aside>
     </Section>
   ),
@@ -466,6 +544,7 @@ const slides = [
     <br/>
     <img src={image07}/>
       <aside className="notes">
+      <p>Usually not lower than 34dB in the real world</p>
       </aside>
     </Section>
   ),
