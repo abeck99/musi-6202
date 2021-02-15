@@ -269,6 +269,10 @@ $list-style-type: (
   transform: translate(-150px, 190px) rotate(270deg);
 }
 
+.recharts-wrapper {
+  margin: 0 auto;
+}
+
 .reveal .slides section .fragment.step-fade-in-then-out {
 	opacity: 0;
 	display: none; }

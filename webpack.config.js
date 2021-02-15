@@ -208,6 +208,7 @@ async function getConfig() {
      
       new HtmlWebpackPlugin({
         filename: 'index.html',
+        chunks: ['index'],
         title: '',
         template: path.join(pathLib, 'template', 'Html.js') // Load a custom template
       }),
