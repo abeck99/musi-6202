@@ -51,7 +51,9 @@ const slides = [
       <img src={numberFormatsImg}/>
       <br/>
       <b>How do we represent this in bits?</b>
-      <aside className="notes">
+        <aside className="notes">
+        <p>Floating point representation, also called "scientfic representation"</p>
+          <p>At lower values you have fine resolution, but you give that up for range</p>
       </aside>
     </Section>
   ),
@@ -74,6 +76,7 @@ const slides = [
 
       </List>
       <aside className="notes">
+      <p>Looking into a file, you'll see the number representation</p>
       </aside>
     </Section>
   ),
@@ -90,6 +93,10 @@ const slides = [
       </List>
       </div>
       <aside className="notes">
+      <p>It's a matter of definition - I can set this mapping to anything as long as encoding/decoding match, it'll be fine</p>
+      <p>Twos complement</p>
+      <p>Just a sequence of words</p>
+      <p>Twos complement - first number is positive/negative</p>
       </aside>
     </Section>
   ),
@@ -129,6 +136,9 @@ const slides = [
 
       </div>
       <aside className="notes">
+      <p>8-bit is exception for 2s-complement</p>
+      <p>128 is zero</p>
+      <p>This is not so important</p>
       </aside>
     </Section>
   ),
@@ -162,6 +172,7 @@ const slides = [
       </div>
       
       <aside className="notes">
+      
       </aside>
     </Section>
   ),
@@ -290,6 +301,16 @@ const slides = [
       </div>
       </List>
       <aside className="notes">
+      <p>What info do we need in the header file?</p>
+      <p>Sampling Rate</p>
+      <p>Word length</p>
+      <p>Number format</p>
+      <p>Number of channels</p>
+      <p>Starting position of wave data</p>
+      <p>Length of wave data</p>
+      <p>Interleaved info</p>
+      <p>Sample => Frame</p>
+      <p>RAW format</p>
       </aside>
     </Section>
   )
