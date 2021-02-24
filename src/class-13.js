@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Section from 'lib/component/Section'
-import ReactAudioPlayer from 'react-audio-player';
+import ReactAudioPlayer from 'react-audio-player'
+import { Graphviz } from 'graphviz-react'
 
 import Presentation from 'lib/template/Presentation'
 
 import Counter from './example/component/Counter'
 import SineWave from './example/component/SineWave'
 import Table from './example/component/Table'
+import MultiTable from './example/component/MultiTable'
 import List from './example/component/List'
 import Schedule from './example/component/Schedule'
 import MyPieChart from './example/component/MyPieChart'
@@ -22,6 +24,12 @@ import image04 from './class-13/img/image04.png'
 import image05 from './class-13/img/image05.png'
 import image06 from './class-13/img/image06.png'
 import image07 from './class-13/img/image07.png'
+import image08 from './class-13/img/image08.png'
+import image09 from './class-13/img/image09.png'
+import image10 from './class-13/img/image10.png'
+import image11 from './class-13/img/image11.png'
+import image12 from './class-13/img/image12.png'
+import image13 from './class-13/img/image13.png'
 
 import sine8Trunc from './class-13/snd/sine_quant_8bit.mp3'
 import sine8Rect from './class-13/snd/sine_quant_8bitrect.mp3'
@@ -52,6 +60,12 @@ import music4Tri from './class-13/snd/bigband_4bittri.mp3'
 import music2Trunc from './class-13/snd/bigband_2bit.mp3'
 import music2Rect from './class-13/snd/bigband_2bitrect.mp3'
 import music2Tri from './class-13/snd/bigband_2bittri.mp3'
+
+import waveShapingExample00 from './class-13/snd/00_Master_16_bit.mp3'
+import waveShapingExample01 from './class-13/snd/01_Truncate_8_bit.mp3'
+import waveShapingExample02 from './class-13/snd/02_Standard_Dither_8_bit.mp3'
+import waveShapingExample03 from './class-13/snd/03_Most_Widely_Known_8_bit.mp3'
+import waveShapingExample04 from './class-13/snd/04_Most_Powerful_8_bit.mp3'
 
 import { MathComponent } from 'mathjax-react'
 import Fragment from 'lib/component/Fragment'
@@ -467,11 +481,257 @@ const slides = [
     </div>
 
 <aside className="notes">
+<p>Decreases SNR, but actually increases noise</p>
+<p>Idea is DECORRELATING the error</p>
       </aside>
     </Section>
   ),
   () => (
     <Section>
+      <h5>Z-Transform (Quick and Dirty)</h5>
+      <MultiTable sizes={[25, 20, 10, 20, 25]}>
+        <div/><div><b>Z</b></div><div/><div><b>Time</b></div><div/>
+        <div/><div><MathComponent tex={String.raw`X(z)`} display={false}/></div><div><MathComponent tex={String.raw`\leftrightarrow`} display={false}/></div><div><MathComponent tex={String.raw`x(n)`} display={false}/></div><div/>
+        <div/><div><MathComponent tex={String.raw`X(z) \cdot z^{-k}`} display={false}/></div><div><MathComponent tex={String.raw`\leftrightarrow`} display={false}/></div><div><MathComponent tex={String.raw`x(n - k)`} display={false}/></div><div/>
+      </MultiTable>
+      <br/>
+      <Fragment>
+        <b>Transfer Function:</b>
+        <MathComponent tex={String.raw`H(z) = \frac{out}{in} = \frac{Y(z)}{X(z)}`}/>
+      </Fragment>
+      <Fragment>
+        <b>Spectrum:</b>
+        <MathComponent tex={String.raw`H(\mathrm{j}\Omega) = H(z\big|_{z=e^{\mathrm{j}\Omega}})`}/>
+      </Fragment>
+      <aside className="notes">
+        <p>For dither, we looked at high passed filtered noise, which gives "perceptual SNR"</p>
+        <p>Noise shaping takes this idea and applies it to quantization error: can we filter the quantization errors?</p>
+        <p>To talk about noise shaping, must introduce Z Transform, but a fuller understanding is for a future class</p>
+        <p>Z properties, similar to fourier transform</p>
+        <p>Fourier transform is special case of Z transform</p>
+        <p>Don't have to understand this yet</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Noise Shaping</h4>
+      <div className="left"><b>Idea</b></div>
+      <div>Filter quantization error, shape its frequency response</div>
+      <br/>
+      <Fragment>
+        <List>
+          <div>Move power to high frequencies</div>
+          <div>Less recognizable in lower frequencies</div>
+        </List>
+      </Fragment>
+      <aside className="notes">
+        <p>Move power to higher frequencies</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>First Order Noise Shaping</h4>
+      <img src={image08}/>
+      <Fragment>
+        <MathComponent tex={String.raw`\eqalign{y(i) &=& [x(i)-q(i-1)]_Q \nonumber\\
+	     		&=& x(i)-q(i-1)+q(i)}`}/>
+      </Fragment>
+      <aside className="notes">
+        <p>Top is normal quantization</p>
+        <p>Subtracting input from quantized output - it's the quantization error</p>
+        <p>z^-1 means delayed by one sample (see previous slide)</p>
+        <p>Subtract delayed quant error from input before quantizing</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+    <div className="normal">
+      <div style={{position: "relative", left: "0px"}}>
+        <MathComponent tex={String.raw`y(i) = x(i)-q(i-1)+q(i)`}/>
+      </div>
+      <Fragment>
+      <div style={{position: "relative", left: "25px"}}>
+        <MathComponent tex={String.raw`\eqalign{Y(z) &=& X(z) - z^{-1}\cdot Q(z) + Q(z) \\
+          &=& X(z) + \underbrace{(1-z^{-1})}_{H_\mathrm{Q}(z)}\cdot Q(z)}`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div style={{position: "relative", left: "-130px"}}>
+        <MathComponent tex={String.raw`\eqalign{\Rightarrow && \\
+          H_\mathrm{Q}(z) &=& 1-z^{-1}}`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div style={{position: "relative", left: "-133px"}}>
+        <MathComponent tex={String.raw`|H_\mathrm{Q}(\mathrm{j}\Omega)| = |1-e^{-\mathrm{j}\Omega}|`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div style={{position: "relative", left: "-21px"}}>
+        <MathComponent tex={String.raw`= 2 \cdot \left|\sin\left(\frac{\Omega}{2}\right)\right|`}/>
+      </div>
+      </Fragment>
+    </div>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Second Order Noise Shaping</h4>
+      <img src={image09}/>
+      <Fragment>
+        <MathComponent tex={String.raw`\eqalign{y(i) &=& [x(i)-2\cdot q(i-1) + q(i-2)]_Q \nonumber\\
+          &=& x(i)-2\cdot q(i-1)+q(i-2)+q(i)}`}/>
+      </Fragment>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+    <div className="normal">
+      <div style={{position: "relative", left: "0px"}}>
+        <MathComponent tex={String.raw`y(i) = x(i)-2\cdot q(i-1)+q(i-2)+q(i)\nonumber`}/>
+      </div>
+      <Fragment>
+      <div style={{position: "relative", left: "40px"}}>
+        <MathComponent tex={String.raw`\eqalign{Y(z) &=& X(z) - 2\cdot z^{-1}\cdot Q(z) + z^{-2}\cdot Q(z) + Q(z)\nonumber\\
+          &=& X(z) + {(1-z^{-1})^2}\cdot Q(z)}`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div style={{position: "relative", left: "-210px"}}>
+        <MathComponent tex={String.raw`\eqalign{\Rightarrow&&\nonumber\\
+          H_\mathrm{Q}(z) &=& (1-z^{-1})^2}`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div className="left">Without derivation: <i>n</i>th order noise shaping</div>
+      <div style={{position: "relative", left: "0px"}}>
+        <MathComponent tex={String.raw`\eqalign{Y(z) &=& X(z) + (1-z^{-1})^n\cdot Q(z)\\
+          \Rightarrow&&\nonumber\\
+          H_\mathrm{Q}(z) &=& (1-z^{-1})^n}`}/>
+      </div>
+      </Fragment>
+    </div>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Higher Order Noise Shaping</h4>
+      <img src={image10} style={{width: "60%"}}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Arbitrary Noise Shaping Transfer Functions</h4>
+      <img src={image11} style={{width: "60%"}}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Dither & Noise Shaping</h4>
+      <img src={image12}/>
+      <aside className="notes">
+        
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Dither & Noise Shaping: System A</h4>
+      <br/>
+      <MathComponent tex={String.raw`\eqalign{y(i) &=& [x(i) + d(n) -q(i-1)]_Q \nonumber\\
+				&=& x(i)+d(n)-q(i-1)+q(i)}`}/>
+      <br/>
+      <Fragment>
+        <MathComponent tex={String.raw`\eqalign{Y(z) &=& X(z) - z^{-1}\cdot Q(z) + Q(z) + D(z)\nonumber\\
+          &=& X(z) + (1-z^{-1})\cdot Q(z) + D(z)}`}/>
+      </Fragment>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Dither & Noise Shaping: System B</h4>
+      <br/>
+      <MathComponent tex={String.raw`\eqalign{y(i) &=& [x(i) + d(n) - q(i-1) - d(n-1)]_Q \nonumber\\
+				&=& x(i)-q(i-1)+q(i)-d(n-1)+d(n)}`}/>
+      <br/>
+      <Fragment>
+        <MathComponent tex={String.raw`\eqalign{Y(z) &=& X(z) - z^{-1}\cdot Q(z) + Q(z) - z^{-1}\cdot D(z) + D(z)\nonumber\\
+          &=& X(z) + (1-z^{-1})\cdot (Q(z) + D(z))}`}/>
+      </Fragment>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Noise Shaping Audio Example</h4>
+      <List>
+        <div>16 Bit: <ReactAudioPlayer src={waveShapingExample00} controls/></div>
+        <div>8 Bit: <ReactAudioPlayer src={waveShapingExample01} controls/></div>
+        <div>8 Bit Dither: <ReactAudioPlayer src={waveShapingExample02} controls/></div>
+        <div>8 Bit Standard Noise Shaping: <ReactAudioPlayer src={waveShapingExample03} controls/></div>
+        <div>8 Bit Powerful Noise Shaping: <ReactAudioPlayer src={waveShapingExample04} controls/></div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Noise Shaping Spectrograms</h4>
+      <img src={image13}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Summary</h4>
+      <div className="normal">
+        <List fragment={true}>
+          <div><b>Oversampling</b>
+            <div className="small">
+              <List>
+                <div>Reduces quantization error power in the audible band</div>
+                <div><i>Process</i>: oversampling <MathComponent tex={String.raw`\rightarrow`} display={false}/> filtering <MathComponent tex={String.raw`\rightarrow`} display={false}/> downsampling</div>
+              </List>
+            </div>
+          </div>
+          <div><b>Dither</b>
+            <div className="small">
+              <List>
+                <div>Reduces correlation of error and signal for low amplitude signals</div>
+                <div>Increases the power of the quantization error slightly</div>
+                <div><i>Process</i>: Add triangular shaped low-level noise before word-length reduction</div>
+              </List>
+            </div>
+          </div>
+          <div><b>Noise Shaping</b>
+            <div className="small">
+              <List>
+                <div>Reduces the audibility of the quantization error by shifting it to high frequencies</div>
+                <div>Works best at high sample rates</div>
+                <div><i>Process</i>: Feedback the quantization error</div>
+              </List>
+            </div>
+          </div>
+        </List>
+      </div>
       <aside className="notes">
       </aside>
     </Section>
