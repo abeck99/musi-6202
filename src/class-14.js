@@ -37,6 +37,8 @@ import image18 from './class-14/img/image18.png'
 import image19 from './class-14/img/image19.png'
 import image20 from './class-14/img/image20.png'
 import image21 from './class-14/img/image21.png'
+import image22 from './class-14/img/image22.png'
+import image23 from './class-14/img/image23.png'
 
 import { MathComponent } from 'mathjax-react'
 import Fragment from 'lib/component/Fragment'
@@ -197,7 +199,8 @@ const slides = [
       <Section>
       <h4>Filter Banks</h4>
       <img src={image11} style={{width:"80%"}}/>
-      <aside className="notes">
+        <aside className="notes">
+          <p>Graphic equalizers are pretty broad band</p>
       </aside>
     </Section>
   ),
@@ -387,6 +390,46 @@ const slides = [
     <Section>
       <h4>Example Filter 3: Visualization</h4>
       <img src={image21}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Example Filter 4</h4>
+      <div className="row">
+        <div className="col-50">
+          <img src={image22}/>
+        </div>
+        <div className="col-50">
+          <Fragment>
+            <MathComponent tex={String.raw`y(i) = \frac{1}{\mathcal{J}}\sum_{j=0}^{\mathcal{J}-1} x(i-j)`}/>
+          </Fragment>
+        </div>
+      </div>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Example Filter 4: Transfer Function/Visualization</h4>
+      <img src={image23} style={{width:"70%"}}/>
+      <MathComponent tex={String.raw`H(\mathrm{j}\omega) = e^{-\mathrm{j}\mathcal{J}\frac{\omega}{2}}\frac{\sin\left(\mathcal{J}\cdot\frac{\omega}{2} \right)}{\mathcal{J}\cdot\sin\left(\frac{\omega}{2} \right)}`}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Example Filter 4: Recursive Implementation</h4>
+      <MathComponent tex={String.raw`\eqalign{			y(i) &=& \sum\limits_{j=0}^{\mathcal{J}-1}{\frac{1}{\mathcal{J}}\cdot x(i-j)}\nonumber\\
+			&=& \frac{1}{\mathcal{J}}\cdot \big(x(i) - x(i-\mathcal{J})\big) + \underbrace{\sum\limits_{j=1}^{\mathcal{J}}{\frac{1}{\mathcal{J}}\cdot x(i-j)}}_{y(i-1)}\nonumber\\
+			&=& \frac{1}{\mathcal{J}}\cdot \big(x(i) - x(i-\mathcal{J})\big) + y(i-1)}`}/>
+      <Fragment>
+        <div>Not applicable with windowed coefficients!</div>
+      </Fragment>
+      
       <aside className="notes">
       </aside>
     </Section>
