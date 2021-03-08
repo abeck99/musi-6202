@@ -39,6 +39,11 @@ import image20 from './class-14/img/image20.png'
 import image21 from './class-14/img/image21.png'
 import image22 from './class-14/img/image22.png'
 import image23 from './class-14/img/image23.png'
+import image24 from './class-14/img/image24.png'
+import image25 from './class-14/img/image25.png'
+import image26 from './class-14/img/image26.png'
+import image27 from './class-14/img/image27.png'
+import image28 from './class-14/img/image28.png'
 
 import { MathComponent } from 'mathjax-react'
 import Fragment from 'lib/component/Fragment'
@@ -436,18 +441,130 @@ const slides = [
   ),
   () => (
     <Section>
+      <h4>Example Filter 5</h4>
+      <img src={image24} style={{width:"70%"}}/>
+      <Fragment>
+        <MathComponent tex={String.raw`\eqalign{y(i) &=& (1-\alpha)\cdot x(i) + \alpha\cdot y(i-1)\\
+        			&=& x(i) + \alpha \cdot (y(i-1) - x(i))}`}/>
+      </Fragment>
+      <aside className="notes">
+        <p>If alpha is 0, then just input, if 1 then just the output</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Example Filter 5: Transfer Function</h4>
+      <MathComponent tex={String.raw`\eqalign{y(i) &=& (1-\alpha)\cdot x(i) + \alpha\cdot y(i-1)\\
+        		H(z) &=& \frac{1-\alpha}{1-\alpha z^{-1}}}`}/>
+      <Fragment>
+      <div style={{position: "relative", left:"-155px"}}>
+        <MathComponent tex={String.raw`H(\mathrm{j}\omega) = \frac{1-\alpha}{1-\alpha e^{-\mathrm{j}\omega}}`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div style={{position: "relative", left:"-155px"}}>
+        <MathComponent tex={String.raw`|H(\mathrm{j}\omega)| = \left|\frac{1-\alpha}{1-\alpha e^{-\mathrm{j}\omega}}\right|`}/>
+      </div>
+      </Fragment>
+      <Fragment>
+      <div style={{position: "relative", left:"20px"}}>
+        <MathComponent tex={String.raw`= \frac{1-\alpha}{\sqrt{\left(1 + \alpha^2 - 2\alpha\cos(\omega)\right)}}`}/>
+      </div>
+      </Fragment>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
     <Section>
+      <h4>Example Filter 5: Visualization</h4>
+      <img src={image25}/>
+      <aside className="notes">
+        <p>Much smaller number of operations, but steep!</p>
+        <p>Equilivant to RC analog filter</p>
+        <p>FIR can have linear phase response, impossible with IIR</p>
+        <p>No FIR filters in analogue, only IIR</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Example Filter 6</h4>
+      <img src={image26}/>
+      <MathComponent tex={String.raw`y(i) = b_0 \cdot x(i) - a_N \cdot y(i - N)`}/>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
     <Section>
+      <h4>Example Filter 6: Transfer Function/Visualization</h4>
+      <img src={image27}/>
+      <MathComponent tex={String.raw`H(\mathrm{j}\omega) = \frac{b_0}{1-a_N\cdot e^{-\mathrm{j}\omega N}}`}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Biquad: Structure</h4>
+      <img src={image28}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Biquad: Structure</h4>
+      <img src={image28} style={{width:"45%"}}/>
+      <MathComponent tex={String.raw`\eqalign{\text{diff eq}: y(i) 	&=& \sum_{k=0}^{K_1}{b_k\cdot x(i-k)} + \sum_{k=1}^{K_2}{-a_k\cdot y(i-k)} \nonumber\\
+			\text{trans. fct}: H(z) 	&=& \frac{Y(z)}{X(z)} =  \frac{\sum_{k=0}^{K_1}{b_k\cdot z^{-k}}}{1 + \sum_{k=1}^{K_2}{a_k\cdot z^{-k}}}}`}/>
+      <aside className="notes">
+        <p>Becomes more complex to find unstable filters, due to interactions in coefficents</p>
+        <p>No k=0 in feedback component</p>
+        <p>EVERY filter is defined in difference equations (-a is by definition, be careful when copying)</p>
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Summary</h4>
+      <List fragment={true}>
+        <div>Filter (equalization) can be used for various tasks
+          <div className="normal"><List><div>Changing the sound quality of a signal</div>
+                                    <div>Hiding unwanted frequency components</div>
+                                    <div>Smoothing</div>
+                                    <div>Processing for measurement and transmission</div>
+                                  </List></div>
+        </div>
+        <div>Most common audio filter types are:
+          <div className="normal"><List><div>Low/high pass</div>
+                                    <div>Peak</div>
+                                    <div>Shelving</div>
+                                  </List></div>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ), () => (
+    <Section>
+      <h4>Summary</h4>
+      <List fragment={true}>
+        <div>Filter parameters include:
+          <div className="normal"><List><div>Frequency (mid, cutoff)</div>
+                                    <div>Bandwidth or Q</div>
+                                    <div>Gain</div>
+                                  </List></div>
+        </div>
+        <div>Filter Orders:
+          <div className="normal"><List><div>Typical orders are 1st, 2nd, maybe 4th</div>
+                                    <div>Higher order give more flexibility wrt transfer function</div>
+                                    <div>Higher orders are difficult to design and control</div>
+                                  </List></div>
+        </div>
+      </List>
       <aside className="notes">
       </aside>
     </Section>
