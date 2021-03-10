@@ -25,6 +25,10 @@ import image01 from './class-15/img/image01.png'
 import image02 from './class-15/img/image02.png'
 import image03 from './class-15/img/image03.png'
 import image04 from './class-15/img/image04.png'
+import image05 from './class-15/img/image05.png'
+import image06 from './class-15/img/image06.png'
+import image07 from './class-15/img/image07.png'
+import image08 from './class-15/img/image08.png'
 
 const jsName = document.getElementById('reveal').attributes.jsName.value
 const isPdf = jsName.endsWith("-pdf")
@@ -249,25 +253,131 @@ const slides = [
   () => (
       <Section>
       <h4>Filters: Filter Design</h4>
+        <List fragment={true}>
+          <div><b>Impulse invariance</b>: sample impulse response
+            <div className="small">
+              <List>
+                <div>If continuous system is band-limited, frequency response will be approximately equal (below <MathComponent tex={String.raw`f_S / 2`} display={false}/>)</div>
+                <div>Special case: No filter definition available <i className="fas fa-long-arrow-alt-right"/> FIR coefficients</div>
+              </List>
+            </div>
+          </div>
+
+          <div><b>Bi-Linear transform</b>
+            <div className="small">
+              <List>
+                <div>Map filter from (analogue) Laplace-plane to (digital) z-plane
+                  <MathComponent tex={String.raw`\eqalign{s &=& \frac{2}{T}\frac{1-z^{-1}}{1+z^{-1}}\\
+                                z &=& \frac{1+s\frac{T_\mathrm{S}}{2}}{1-s\frac{T_\mathrm{S}}{2}}}`}/></div>
+                <div>Introduces frequency warping (increasing towards Nyquist frequency)</div>
+              </List>
+            </div>
+          </div>
+
+        </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+      <Section>
+      <h4>Filters: Filter Design</h4>
+        <List fragment={true}>
+          <div><b>Frequency Transformation</b>
+            <div className="small">
+              <List>
+                <div>Transfrom a (low-pass) prototype filter</div>
+                <div>Usually via all-pass mapping filter</div>
+              </List>
+            </div>
+          </div>
+          <div><b>Iterative approximation</b> of the magnitude response</div>
+          <div><b>Intuitive methods</b>
+            <div className="small">
+              <List>
+                <div>Manually move zeros and poles in z-plane</div>
+                <div>Draw magnitude response in frequency domain</div>
+              </List>
+            </div>
+          </div>
+
+        </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Effects of Word Length</h4>
       <List>
-      <div><b>Impulse invariance</b>: sample impulse response
-      <div className="small"><List>
-      <div>If continuous system is band-limited, frequency response will be approximately equal (below <MathComponent tex={String.raw`f_S / 2`} display={false}/>)</div>
-      <div>Special case: No filter definition available <i className="fas fa-long-arrow-alt-right"/> FIR coefficients</div>
-      </List></div></div>
+        <div>Quantization of filter coefficients can lead to problems</div>
+        <div>Effects depend on filter type and structure
+          <div className="small">
+            <List>
+              <div>Changes of transfer function</div>
+              <div>Instability</div>
+              <div>Quantization noise <i className="fas fa-long-arrow-alt-right"/> SNR</div>
+            </List>
+          </div>
+        </div>
       </List>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
-      <Section>
+    <Section>
+      <img src={image05}/>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
-      <Section>
+    <Section>
+      <img src={image06}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <img src={image07}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <img src={image08}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Summary</h4>
+      <Schedule sizes={[40, 30, 30]}
+                tableClass="normal"
+                firstRowClass="heading"
+                evenRowClass="evenRow"
+                oddRowClass="oddRow"
+                items={[
+                  ["", "FIR", "IIR"],
+                  ["IR Length", "Finite", "Infinite"],
+                  ["Structure", "Non-Recursive", "Recursive"],
+                  ["Phase Linearity", "Possible", "Impossible"],
+                  ["Ratio Steepness/Workload", "Low", "High"],
+                  ["Stability", "Guaranteed", "Possibly Unstable"]
+                ]}/>
+      <List>
+        <div>Every LTI system is <b>completely described</b> either by
+          <List>
+            <div>Its complex transfer function,</div>
+            <div>Its impulse response, or</div>
+            <div>Its pole and zero position in the z-plane</div>
+          </List>
+        </div>
+      </List>
       <aside className="notes">
       </aside>
     </Section>

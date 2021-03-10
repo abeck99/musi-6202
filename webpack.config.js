@@ -25,7 +25,7 @@ const pathDist = path.join(pathBase, 'dist');
 
 const getEntries = function(filepath) {
   return fs.readdirSync(filepath)
-    .filter(file => file.match(/^(class.*\.js|index\.js)$/))
+    .filter(file => file.match(/^(class.*\.js|supp.*\.js|index\.js)$/))
     .map(file => {
       return {
         name: path.parse(file).name,
