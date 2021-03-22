@@ -250,7 +250,7 @@ const slides = [
       <h4>Vibrato + Input Signal</h4>
       <img src={image06} style={{width:"20%"}}/>
       <div><ReactAudioPlayer src={svChorus} controls/></div>
-      <div><b>Slapback</b></div>
+      <div><b>Simple Chorus</b></div>
       <List>
         <div><MathComponent tex={String.raw`f_{mod}`} display={false}/> = 1.5 Hz</div>
         <div><MathComponent tex={String.raw`A`} display={false}/> = 2 ms</div>
@@ -300,8 +300,8 @@ const slides = [
         <div><MathComponent tex={String.raw`f_{mod}`} display={false}/> = 1.5 Hz</div>
         <div><MathComponent tex={String.raw`A`} display={false}/> = 2 ms</div>
         <div><MathComponent tex={String.raw`M`} display={false}/> = 2 ms</div>
-        <div><MathComponent tex={String.raw`BL`} display={false}/> = 0.7</div>
-        <div><MathComponent tex={String.raw`FF`} display={false}/> = 1.0</div>
+        <div><MathComponent tex={String.raw`BL`} display={false}/> = 1.0</div>
+        <div><MathComponent tex={String.raw`FF`} display={false}/> = 0.7</div>
         <div><MathComponent tex={String.raw`FB`} display={false}/> = -0.7</div>
       </List>
       
