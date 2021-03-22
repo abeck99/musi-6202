@@ -20,3 +20,4 @@ decktape --size='1920x1080' dist/class-16-pdf.html dist/class-16.pdf --shm-size=
 decktape --size='1920x1080' dist/class-17-pdf.html dist/class-17.pdf --shm-size=1gb
 decktape --size='1920x1080' dist/class-18-pdf.html dist/class-18.pdf --shm-size=1gb
 decktape --size='1920x1080' dist/class-19-pdf.html dist/class-19.pdf --shm-size=1gb
+decktape --size='1920x1080' dist/class-20-pdf.html dist/class-20.pdf --shm-size=1gb
