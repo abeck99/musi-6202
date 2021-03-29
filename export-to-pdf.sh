@@ -1,5 +1,5 @@
 #!/bin/bash
-
+>
 decktape --size='1920x1080' dist/class-00-pdf.html dist/class-00.pdf --shm-size=1gb
 decktape --size='1920x1080' dist/class-01-pdf.html dist/class-01.pdf --shm-size=1gb
 decktape --size='1920x1080' dist/class-02-pdf.html dist/class-02.pdf --shm-size=1gb
@@ -21,3 +21,4 @@ decktape --size='1920x1080' dist/class-17-pdf.html dist/class-17.pdf --shm-size=
 decktape --size='1920x1080' dist/class-18-pdf.html dist/class-18.pdf --shm-size=1gb
 decktape --size='1920x1080' dist/class-19-pdf.html dist/class-19.pdf --shm-size=1gb
 decktape --size='1920x1080' dist/class-20-pdf.html dist/class-20.pdf --shm-size=1gb
+decktape --size='1920x1080' dist/class-21-pdf.html dist/class-21.pdf --shm-size=1gb
