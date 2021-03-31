@@ -6,6 +6,7 @@ const defaultProps = {
   overrides: [],
   fragment: false,
   align: "left",
+  fullWidth: false,
 }
 
 export default class List extends Component {
@@ -16,7 +17,7 @@ export default class List extends Component {
     }
     
     var { fragment } = props
-    const { children, icon, overrides } = props
+    const { children, icon, overrides, fullWidth } = props
     const overrides_ = overrides == undefined ? {} : overrides
 
     const fragmentAll = fragment == "all"
@@ -24,9 +25,11 @@ export default class List extends Component {
 
     const children_ = Array.isArray(children) ? children : [children]
 
+    const style = fullWidth ? {width: "100%"} : {}
+
     return (
       <div className={props.align}>
-        <ul className="fa-ul">
+        <ul className="fa-ul" style={style}>
           {
             children_.map((child, i) => {
               const iconName = (overrides_[i] == undefined) ? icon : overrides_[i]
