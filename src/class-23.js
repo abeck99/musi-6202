@@ -347,7 +347,7 @@ const slides = [
       <h4>Phase Vocoder: Audio Example</h4>
       <List>
         <div>Original: <ReactAudioPlayer src={acathy} controls/></div>
-        <div>Resample: <ReactAudioPlayer src={acathypvout} controls/></div>
+        <div>Phase Vocoded: <ReactAudioPlayer src={acathypvout} controls/></div>
       </List>
       <aside className="notes">
       </aside>
@@ -459,11 +459,13 @@ const slides = [
       <h4>Phase Unwrapping</h4>
       <List>
         <div>Compute unwrapped phase difference
-    <MathComponent tex={String.raw`\eqalign{\Delta\Phi_{\mathrm{u}}(k,n)	&=& \Phi_{\mathrm{u}}(k,n) - \Phi(k,n-1)\nonumber\\
-                                                &=& \hat{\Phi}(k,n) + \mathrm{princarg}\left[ \Phi(k,n) - \hat{\Phi}(k,n) \right] - \Phi(k,n-1)\nonumber \\
-                                                &=& \frac{2\pi k}{\mathcal{K}}\mathcal{H} + \mathrm{princarg}\left[ \Phi(k,n) - \Phi(k,n-1) - \frac{2\pi k}{\mathcal{K}}\mathcal{H} \right]\nonumber}`}/>
         </div>
       </List>
+      <div className="normal">
+        <MathComponent tex={String.raw`\eqalign{\Delta\Phi_{\mathrm{u}}(k,n)	&=& \Phi_{\mathrm{u}}(k,n) - \Phi(k,n-1)\nonumber\\
+                                                &=& \hat{\Phi}(k,n) + \mathrm{princarg}\left[ \Phi(k,n) - \hat{\Phi}(k,n) \right] - \Phi(k,n-1)\nonumber \\
+                                                &=& \frac{2\pi k}{\mathcal{K}}\mathcal{H} + \mathrm{princarg}\left[ \Phi(k,n) - \Phi(k,n-1) - \frac{2\pi k}{\mathcal{K}}\mathcal{H} \right]\nonumber}`}/>
+      </div>
       <aside className="notes">
       </aside>
     </Section>
@@ -516,24 +518,350 @@ const slides = [
   ),
   () => (
     <Section>
+      <h4>Phase Vocoder Artifacts: Spectral Leakage</h4>
+      <img src={image06} style={{width:"55%"}}/>
+      <img src={image07} style={{width:"55%"}}/>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
     <Section>
+      <h4>Phase Vocoder Phasing</h4>
+      <img src={image08}/>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
     <Section>
+      <h4>Use <i>Frequency Reassignment</i> for grouping and phase sync</h4>
+      <List>
+        <div>Original: <ReactAudioPlayer src={acathy} controls/></div>
+        <div>Phase Vocoder: <ReactAudioPlayer src={acathypvout} controls/></div>
+        <div>PV w/ grouped phase: <ReactAudioPlayer src={acathyEffout} controls/></div>
+      </List>
       <aside className="notes">
       </aside>
     </Section>
   ),
   () => (
     <Section>
+      <h4>Phase Vocoder Artifacts - Unsynced Harmonics</h4>
+      <img src={image09} style={{width:"55%"}}/>
+      <img src={image10} style={{width:"55%"}}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Use <i>Harmonic Analysis</i> for Grouping and Phase Sync</h4>
+      <List>
+        <div>Original: <ReactAudioPlayer src={acathy} controls/></div>
+        <div>Phase Vocoder: <ReactAudioPlayer src={acathypvout} controls/></div>
+        <div>PV w/ synced phase: <ReactAudioPlayer src={acathyEffout} controls/></div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Phase Vocoder Artifacts: Interchannel Phasing</h4>
+      <div>Phase estimation between channels slightly off due to</div>
+      <List>
+        <div>Numerical inaccuracies (cumulative!)</div>
+        <div>Overlapping frequency components</div>
+      </List>
+      <Fragment>
+        <div>Change in spatial image</div>
+        <List>
+          <div>Original: <ReactAudioPlayer src={abigband} controls/></div>
+          <div>Phase Vocoder: <ReactAudioPlayer src={abigbandPVoc} controls/></div>          
+        </List>
+      </Fragment>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Phase Vocoder Artifacts: Transient Smearing</h4>
+      <img src={image11} style={{width:"80%"}}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Transient Smearing Example</h4>
+      <List>
+          <div>Original: <ReactAudioPlayer src={acastanets} controls/></div>
+          <div>Phase Vocoder: <ReactAudioPlayer src={acastanetsPVoc} controls/></div>        
+      </List>
+      <Fragment>
+        <div>Detect transients and <i>reset phase</i> per bin</div>
+        <List>
+          <div>Original: <ReactAudioPlayer src={a41_m} controls/></div>
+          <div>Phase Vocoder: <ReactAudioPlayer src={a41pvout} controls/></div>        
+          <div>PV w/ Phase Reset: <ReactAudioPlayer src={a41Proout} controls/></div>        
+        </List>
+      </Fragment>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Time Stretching: Inherent Problems</h4>
+      <List fragment={true}>
+        <div>Stretching the audio data can lead to <b>"non-natural"</b> results</div>
+        <div><b>Examples</b>
+          <List fragment={true}>
+            <div>Tempo dependent <i>timing variations</i></div>
+            <div>Other performance related aspects may get inappropriate lengths and speed: <i>vibrato, tremolo, glissando</i></div>
+          </List>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Pitch Shifting</h4>
+      <List fragment={true}>
+        <div><div><b>Definition</b></div>
+          <div>Change pitch without changing tempo</div>
+        </div>
+        <div><div><b>Method</b></div>
+          <div>Combine stretching and <i>sample rate conversion</i> (interpolation)</div>
+          <ol><li>Change length with stretching</li><li>Resample to compensate for length difference</li></ol>
+        </div>
+        <div><b>Implementation</b>: Differentiate "external" and "internal" parameters
+          <List>
+            <div><i>External</i>: stretch <MathComponent tex={String.raw`s_e`} display={false}/> and pitch <MathComponent tex={String.raw`p_e`} display={false}/></div>
+            <div><i>External</i>: stretch <MathComponent tex={String.raw`s_i`} display={false}/> and resample <MathComponent tex={String.raw`r_i`} display={false}/></div>
+          </List>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Pitch Shifting: Example</h4>
+      <div>Pitch shift factor <MathComponent tex={String.raw`p = \frac{4}{3}`} display={false}/></div>
+      <List>
+        <div><i>Time stretch</i> (increase length / decrease tempo) <MathComponent tex={String.raw`s = \frac{4}{3}`} display={false}/></div>
+        <div><i>Resample</i> (decrease length / increase pitch) <MathComponent tex={String.raw`s = \frac{3}{4}`} display={false}/></div>
+        <div>OLA: <ReactAudioPlayer src={acathyOLApitch} controls/></div>
+        <div>Phase Vocoder: <ReactAudioPlayer src={acathypvpitch} controls/></div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Pitch Shifting: Standard Approach Examples</h4>
+      <List fragment={true}>
+        <div>
+          <div>External: <MathComponent tex={String.raw`s_e = 1 ...  p_e = 2`} display={false}/></div>
+          <div>Internal: <MathComponent tex={String.raw`s_i = 2 ...  r_i = \frac{1}{2}`} display={false}/></div>
+        </div>
+        <div>
+          <div>External: <MathComponent tex={String.raw`s_e = 1  ... p_e = \frac{4}{3}`} display={false}/></div>
+          <div>Internal: <MathComponent tex={String.raw`s_i = \frac{4}{3} ...  r_i = \frac{3}{4}`} display={false}/></div>
+        </div>
+        <div>
+          <div>External: <MathComponent tex={String.raw`s_e = \frac{1}{2} ...  p_e = 2`} display={false}/></div>
+          <div>Internal: <MathComponent tex={String.raw`s_i = 1 ...  r_i = \frac{1}{2}`} display={false}/></div>
+        </div>
+        <div>
+          <div>External: <MathComponent tex={String.raw`s_e = 2 ...  p_e = 2`} display={false}/></div>
+          <div>Internal: <MathComponent tex={String.raw`s_i = 4 ...  r_i = \frac{1}{2}`} display={false}/></div>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Pitch Shifting: Frequency Domain Approach</h4>
+      <List fragment={true}>
+        <div>STFT</div>
+        <div>Magnitude and phase</div>
+        <div>Magnitude and instantaneous frequency</div>
+        <div>Resample both magnitude and frequency spectrum according to pitch factor</div>
+        <div>Magnitude and phase</div>
+        <div>Complex spectrum</div>
+        <div>IFFT and OLA</div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Format Preservation: Time Domain</h4>
+      <List fragment={true}>
+        <div><b>Idea</b>
+          <List>
+            <div>Signal is pulse train filtered by transfer function
+              <List>
+                <div>Pulse train determines fundamental frequency</div>
+                <div>Transfer function determines formant shape / timbre characteristics</div>
+              </List>
+            </div>
+          </List>
+        </div>
+        <Fragment>
+          <div className="row">
+            <div className="col-60">
+              <b>Approach</b>
+              <List fragment={true}>
+                <div>Change grain / pulse distance</div>
+                <div>Grain "content" not modified</div>
+                <div>-> Freq domain not modified</div>
+                <div><b>"Same" spectrum, different pitch</b></div>
+              </List>
+            </div>
+            <div className="col-40">
+              <img src={image12}/>
+            </div>
+          </div>
+        </Fragment>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Formant Preservation: Frequency Domain</h4>
+      <List fragment={true}>
+        <div><b>Idea</b>
+          <List>
+            <div>Preserve spectral envelope</div>
+          </List>
+        </div>
+        <div className="row">
+          <div className="col-60">
+            <div><b>Approach</b>
+              <List fragment={true}>
+                <div>Measure spectral envelope</div>
+                <div>Apply inverse envelope (whitening)</div>
+                <div>Pitch shift</div>
+                <div>Apply spectral envelope</div>
+              </List>
+            </div>
+          </div>
+          <div className="col-40">
+            <img src={image13}/>
+          </div>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Spectral Envelope Estimate</h4>
+      <List fragment>
+        <div><b>Approaches</b>
+          <List>
+            <div>LPC coefficients</div>
+            <div>Spectral maxima</div>
+          </List>
+        </div>
+        <div><b>Potential issues</b>
+          <List>
+            <div><div><i>Polyphonic input</i> audio</div>
+              <div>'Superposition' of envelopes</div>
+            </div>
+            <div><i>Very high / low pitch factors</i>: High frequency boost / cut</div>
+            <div><i>Estimate resolution</i>
+              <List>
+                <div>Too coarse -> Loss of timbre characteristics</div>
+                <div>Too fine -> Impress pitch characteristics (harmonic pattern) on spectrum</div>
+              </List>
+            </div>
+          </List>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Pitch Shifting: Audio Examples</h4>
+      <MultiTable sizes={[25, 25, 25, 25]}>
+        <div/>
+        <div>OLA</div>
+        <div>PSOLA</div>
+        <div>PVOC</div>
+        <div>Original</div>
+        <div><ReactAudioPlayer src={acathy} style={{width: "125px"}} controls/></div>
+        <div><ReactAudioPlayer src={acathy} style={{width: "125px"}} controls/></div>
+        <div><ReactAudioPlayer src={acathy} style={{width: "125px"}} controls/></div>
+        <div>Resample</div>
+        <div><ReactAudioPlayer src={acathyOLApitch} style={{width: "125px"}} controls/></div>
+        <div><ReactAudioPlayer src={acathySOLpitch} style={{width: "125px"}} controls/></div>
+        <div><ReactAudioPlayer src={acathyPropitch} style={{width: "125px"}} controls/></div>
+        <div>Formant</div>
+        <div><ReactAudioPlayer src={acathyOLApitchf} style={{width: "125px"}} controls/></div>
+        <div><ReactAudioPlayer src={acathySOLpitchf} style={{width: "125px"}} controls/></div>
+        <div><ReactAudioPlayer src={acathyPropitchf} style={{width: "125px"}} controls/></div>
+      </MultiTable>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Summary</h4>
+      <List fragment={true}>
+        <div>Pitch stretching and pitch shifting are largely equivalent algorithms
+          <List>
+            <div>Sample artifacts</div>
+            <div>Same workload</div>
+          </List>
+        </div>
+        <div>Monophonic time-stretching with PSOLA-based approaches
+          <List>
+            <div>Easier to solve</div>
+            <div>Has bad artifacts if pitch tracker is off</div>
+          </List>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Summary</h4>
+      <List fragment={true}>
+        <div>Polyphonic time-stretching with PV-based approaches
+          <List>
+            <div>Complicated due to tradeoffs (e.g., frequency vs time resolution</div>
+          </List>
+        </div>
+        <div>General challenges:
+          <List>
+            <div>Noisy and transient signals</div>
+            <div>Resulting timbre changes</div>
+            <div>Perceived naturalness of result</div>
+            <div>Time resolution / accuracy due to blocked processing</div>
+          </List>
+        </div>
+      </List>
       <aside className="notes">
       </aside>
     </Section>
