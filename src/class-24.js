@@ -32,6 +32,7 @@ import image10 from './class-24/img/image10.png'
 import image11 from './class-24/img/image11.png'
 import image12 from './class-24/img/image12.png'
 import image13 from './class-24/img/image13.png'
+import image14 from './class-24/img/image14.png'
 
 import jamo_snippet from './class-24/snd/jamo_snippet.mp3'
 import jamo_snippet_pred from './class-24/snd/jamo_snippet_Pred.mp3'
@@ -580,6 +581,55 @@ const slides = [
             <div>Reduce quantization wordlength / lower sample rate</div>
             <div>More techniques discussed in future classes</div>
           </List>
+        </div>
+      </List>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <h4>Redundancy Coding</h4>
+      <img src={image14}/>
+      <aside className="notes">
+      </aside>
+    </Section>
+  ),
+  () => (
+    <Section>
+      <List fragment={true}>
+        <div><b>Properties</b>
+          <List>
+            <div>Perfect signal reconstruction</div>
+            <div><div>Bitrate reduction depends on input signal</div>
+              <div>Typical gain (stereo, 48k): Factor 2</div>
+            </div>
+            <div>No constant bitrate -> Streaming only with large buffers</div>
+          </List>
+        </div>
+        <div>
+          <MultiTable sizes={[20,26,26,26]}>
+            <div><b>Name</b></div>
+            <div><b>Sampling Rates</b></div>
+            <div><b>Channels</b></div>
+            <div><b>Word Length</b></div>
+            <div>Shorten</div>
+            <div>All</div>
+            <div>2</div>
+            <div>8 / 16</div>
+            <div>FLAC</div>
+            <div>1-1048k</div>
+            <div>8</div>
+            <div>4-32</div>
+            <div>MLP</div>
+            <div>44.1k - 192k</div>
+            <div>63</div>
+            <div>1 - 24</div>
+            <div>ALS</div>
+            <div>All</div>
+            <div>65536</div>
+            <div>1 - 32 (int), 32 (float)</div>
+          </MultiTable>
         </div>
       </List>
       <aside className="notes">
