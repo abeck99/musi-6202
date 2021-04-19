@@ -7,6 +7,7 @@ const defaultProps = {
   fragment: false,
   align: "left",
   fullWidth: false,
+  ordered: false,
 }
 
 export default class List extends Component {
@@ -17,7 +18,7 @@ export default class List extends Component {
     }
     
     var { fragment } = props
-    const { children, icon, overrides, fullWidth } = props
+    const { children, icon, overrides, fullWidth, ordered } = props
     const overrides_ = overrides == undefined ? {} : overrides
 
     const fragmentAll = fragment == "all"
@@ -29,24 +30,48 @@ export default class List extends Component {
 
     return (
       <div className={props.align}>
-        <ul className="fa-ul" style={style}>
-          {
-            children_.map((child, i) => {
-              const iconName = (overrides_[i] == undefined) ? icon : overrides_[i]
-              const iconClassName = `fas ${iconName}`
-              const key = `list-${i}`
-              if (fragment && (fragmentAll || i != 0)) {
-                return (
-                  <li key={key}><Fragment><span className="fa-li"><i className={iconClassName}></i></span>{child}</Fragment></li>
-                )
-              } else {
-                return (
-                  <li key={key}><span className="fa-li"><i className={iconClassName}></i></span>{child}</li>
-                )
-              }
-            })
-          }
-        </ul>
+        {
+          ordered ?
+            (
+              <ol style={style}>
+                {
+                  children_.map((child, i) => {
+                    const key = `${i}`
+                    if (fragment && (fragmentAll || i != 0)) {
+                      return (
+                        <li key={key}><Fragment>{child}</Fragment></li>
+                      )
+                    } else {
+                      return (
+                        <li key={key}>{child}</li>
+                      )
+                    }
+                  })
+                }
+              </ol>
+            )
+            :
+            (
+              <ul className="fa-ul" style={style}>
+                {
+                  children_.map((child, i) => {
+                    const iconName = (overrides_[i] == undefined) ? icon : overrides_[i]
+                    const iconClassName = `fas ${iconName}`
+                    const key = `list-${i}`
+                    if (fragment && (fragmentAll || i != 0)) {
+                      return (
+                        <li key={key}><Fragment><span className="fa-li"><i className={iconClassName}></i></span>{child}</Fragment></li>
+                      )
+                    } else {
+                      return (
+                        <li key={key}><span className="fa-li"><i className={iconClassName}></i></span>{child}</li>
+                      )
+                    }
+                  })
+                }
+              </ul>
+            )
+        }
       </div>
     )
   }
